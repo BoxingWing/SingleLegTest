@@ -1,0 +1,9 @@
+<architecture brief="Multicore with core affinity" format="1.1"  revision="1.1" uuid="MulticoreCustomAPI"  name="MulticoreCustomAPI">
+<configurationSet>
+<parameter name="SystemTargetFile" value="ert.tlc"/>
+</configurationSet>
+<node name="MulticoreProcessor" type="SoftwareNode" uuid="MulticoreProcessor"/>
+<template name="CustomTask" type="Task" uuid="CustomTask">
+<property name="TaskAffinity" prompt="Affinity:" value="1" evaluate="true"/>
+</template>
+</architecture>
