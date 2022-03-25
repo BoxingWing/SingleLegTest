@@ -4,7 +4,7 @@
  * Code generation for Simulink model "motor_Test".
  *
  * Simulink Coder version                : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Mon Mar 21 14:30:01 2022
+ * C source code generated on : Thu Mar 24 16:26:16 2022
  *
  * Note that the generated code is not dependent on this header file.
  * The file is used in cojuction with the automatic build procedure.
@@ -16,9 +16,4 @@
 #ifndef RTW_HEADER_rtmodel_h_
 #define RTW_HEADER_rtmodel_h_
 #include "motor_Test.h"
-
-/* Macros generated for backwards compatibility  */
-#ifndef rtmGetStopRequested
-#define rtmGetStopRequested(rtm)       ((void*) 0)
-#endif
 #endif                                 /* RTW_HEADER_rtmodel_h_ */

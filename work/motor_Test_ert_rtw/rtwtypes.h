@@ -7,9 +7,9 @@
  *
  * Code generation for model "motor_Test".
  *
- * Model version              : 3.0
+ * Model version              : 3.20
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Mon Mar 21 14:30:01 2022
+ * C source code generated on : Thu Mar 24 16:26:16 2022
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping

@@ -7,9 +7,9 @@
  *
  * Code generation for model "motor_Test".
  *
- * Model version              : 3.0
+ * Model version              : 3.20
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Mon Mar 21 14:30:01 2022
+ * C source code generated on : Thu Mar 24 16:26:16 2022
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -22,8 +22,17 @@
 #define RTW_HEADER_motor_Test_private_h_
 #include "rtwtypes.h"
 #include "multiword_types.h"
+#include "motor_Test.h"
 
-extern real_T rt_urand_Upu32_Yd_f_pw_snf(uint32_T *u);
-extern real_T rt_nrand_Upu32_Yd_f_pw_snf(uint32_T *u);
+/* Private macros used by the generated code to access rtModel */
+#ifndef rtmSetTFinal
+#define rtmSetTFinal(rtm, val)         ((rtm)->Timing.tFinal = (val))
+#endif
+
+extern void motor_Test_CANReceive_Start(B_CANReceive_motor_Test_T *localB,
+  DW_CANReceive_motor_Test_T *localDW, P_CANReceive_motor_Test_T *localP);
+extern void motor_Test_CANReceive(B_CANReceive_motor_Test_T *localB,
+  DW_CANReceive_motor_Test_T *localDW, P_CANReceive_motor_Test_T *localP);
+extern void motor_Test_CANReceive_Term(DW_CANReceive_motor_Test_T *localDW);
 
 #endif                                 /* RTW_HEADER_motor_Test_private_h_ */

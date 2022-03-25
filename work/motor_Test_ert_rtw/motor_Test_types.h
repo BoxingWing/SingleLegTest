@@ -7,9 +7,9 @@
  *
  * Code generation for model "motor_Test".
  *
- * Model version              : 3.0
+ * Model version              : 3.20
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Mon Mar 21 14:30:01 2022
+ * C source code generated on : Thu Mar 24 16:26:16 2022
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -24,24 +24,76 @@
 #include "multiword_types.h"
 
 /* Model Code Variants */
-#ifndef struct_tag_tqvyq7c4NVcpAKseXMducE
-#define struct_tag_tqvyq7c4NVcpAKseXMducE
+#ifndef struct_tag_FrILEhnpvhQeAYRucCAgZD
+#define struct_tag_FrILEhnpvhQeAYRucCAgZD
 
-struct tag_tqvyq7c4NVcpAKseXMducE
+struct tag_FrILEhnpvhQeAYRucCAgZD
 {
   boolean_T matlabCodegenIsDeleted;
   int32_T isInitialized;
   boolean_T isSetupComplete;
+  real_T SampleTime;
+  char_T IdentifierType[28];
+  int32_T sockHandleDataFrames;
+  int32_T sockHandleErrorFrames;
+  boolean_T Initialized;
+  boolean_T SetIdentifierType;
 };
 
-#endif                                 /* struct_tag_tqvyq7c4NVcpAKseXMducE */
+#endif                                 /* struct_tag_FrILEhnpvhQeAYRucCAgZD */
 
-#ifndef typedef_codertarget_raspi_internal_LE_T
-#define typedef_codertarget_raspi_internal_LE_T
+#ifndef typedef_codertarget_raspi_internal_CA_T
+#define typedef_codertarget_raspi_internal_CA_T
 
-typedef struct tag_tqvyq7c4NVcpAKseXMducE codertarget_raspi_internal_LE_T;
+typedef struct tag_FrILEhnpvhQeAYRucCAgZD codertarget_raspi_internal_CA_T;
 
-#endif                             /* typedef_codertarget_raspi_internal_LE_T */
+#endif                             /* typedef_codertarget_raspi_internal_CA_T */
+
+#ifndef struct_tag_BlgwLpgj2bjudmbmVKWwDE
+#define struct_tag_BlgwLpgj2bjudmbmVKWwDE
+
+struct tag_BlgwLpgj2bjudmbmVKWwDE
+{
+  uint32_T f1[8];
+};
+
+#endif                                 /* struct_tag_BlgwLpgj2bjudmbmVKWwDE */
+
+#ifndef typedef_cell_wrap_motor_Test_T
+#define typedef_cell_wrap_motor_Test_T
+
+typedef struct tag_BlgwLpgj2bjudmbmVKWwDE cell_wrap_motor_Test_T;
+
+#endif                                 /* typedef_cell_wrap_motor_Test_T */
+
+#ifndef struct_tag_La5gXUeuYHSZ0kHSpmheuB
+#define struct_tag_La5gXUeuYHSZ0kHSpmheuB
+
+struct tag_La5gXUeuYHSZ0kHSpmheuB
+{
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  cell_wrap_motor_Test_T inputVarSize;
+  char_T IdentifierType[28];
+  int32_T sockHandleDataFrames;
+  int32_T sockHandleErrorFrames;
+  boolean_T notFirstStep;
+  boolean_T Initialized;
+  boolean_T SetIdentifierType;
+};
+
+#endif                                 /* struct_tag_La5gXUeuYHSZ0kHSpmheuB */
+
+#ifndef typedef_codertarget_raspi_internal__c_T
+#define typedef_codertarget_raspi_internal__c_T
+
+typedef struct tag_La5gXUeuYHSZ0kHSpmheuB codertarget_raspi_internal__c_T;
+
+#endif                             /* typedef_codertarget_raspi_internal__c_T */
+
+/* Parameters for system: '<Root>/CAN Receive' */
+typedef struct P_CANReceive_motor_Test_T_ P_CANReceive_motor_Test_T;
 
 /* Parameters (default storage) */
 typedef struct P_motor_Test_T_ P_motor_Test_T;

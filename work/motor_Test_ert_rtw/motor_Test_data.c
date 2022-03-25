@@ -7,9 +7,9 @@
  *
  * Code generation for model "motor_Test".
  *
- * Model version              : 3.0
+ * Model version              : 3.20
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Mon Mar 21 14:30:01 2022
+ * C source code generated on : Thu Mar 24 16:26:16 2022
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -23,43 +23,28 @@
 
 /* Block parameters (default storage) */
 P_motor_Test_T motor_Test_P = {
-  /* Mask Parameter: CounterLimited_uplimit
-   * Referenced by: '<S3>/FixPt Switch'
+  /* Expression:  [0x94 0 0 0 0 0 0 0]
+   * Referenced by: '<Root>/read single loop angle'
    */
-  10U,
+  { 148U, 0U, 0U, 0U, 0U, 0U, 0U, 0U },
 
-  /* Expression: 0
-   * Referenced by: '<Root>/Random Number'
-   */
-  0.0,
+  /* Start of '<Root>/CAN Receive1' */
+  {
+    /* Expression: -1
+     * Referenced by: '<Root>/CAN Receive1'
+     */
+    -1.0
+  }
+  ,
 
-  /* Computed Parameter: RandomNumber_StdDev
-   * Referenced by: '<Root>/Random Number'
-   */
-  1.0,
+  /* End of '<Root>/CAN Receive1' */
 
-  /* Expression: 0
-   * Referenced by: '<Root>/Random Number'
-   */
-  0.0,
-
-  /* Computed Parameter: Constant_Value
-   * Referenced by: '<S3>/Constant'
-   */
-  0U,
-
-  /* Computed Parameter: Output_InitialCondition
-   * Referenced by: '<S1>/Output'
-   */
-  0U,
-
-  /* Computed Parameter: Threshold_Value
-   * Referenced by: '<Root>/Threshold '
-   */
-  7U,
-
-  /* Computed Parameter: FixPtConstant_Value
-   * Referenced by: '<S2>/FixPt Constant'
-   */
-  1U
+  /* Start of '<Root>/CAN Receive' */
+  {
+    /* Expression: -1
+     * Referenced by: '<Root>/CAN Receive'
+     */
+    -1.0
+  }
+  /* End of '<Root>/CAN Receive' */
 };
