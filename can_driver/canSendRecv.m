@@ -1,5 +1,7 @@
-classdef Source < realtime.internal.SourceSampleTime & ...
-        coder.ExternalDependency
+classdef canSendRecv < matlab.System & ...
+        coder.ExternalDependency ...
+        & matlab.system.mixin.Propagates ...
+        & matlab.system.mixin.CustomIcon
     %
     % System object template for a source block.
     % 
@@ -16,7 +18,7 @@ classdef Source < realtime.internal.SourceSampleTime & ...
     %#ok<*EMCA>
     
     properties
-        % Public, tunable properties.
+        canPort='can1';
     end
     
     properties (Nontunable)
@@ -29,7 +31,7 @@ classdef Source < realtime.internal.SourceSampleTime & ...
     
     methods
         % Constructor
-        function obj = Source(varargin)
+        function obj = canSendRecv(varargin)
             % Support name-value pair arguments when constructing the object.
             setProperties(obj,nargin,varargin{:});
         end
@@ -41,18 +43,25 @@ classdef Source < realtime.internal.SourceSampleTime & ...
                 % Place simulation setup code here
             else
                 % Call C-function implementing device initialization
-                % coder.cinclude('source.h');
-                % coder.ceval('source_init');
+                obj.canPort='can1';
+                coder.cinclude('can_motor_encoder.h');
+                coder.ceval('canSetup',obj.canPort);
             end
         end
         
-        function y = stepImpl(obj)   %#ok<MANU>
-            y = double(0);
+        function [recv_ID,recv_rawData,err] = stepImpl(obj,canID_array,send_RawData,dev_Num)   %#ok<MANU>
+            % canID_array: int32 *
+            % send_RawData: uint8 *
+            % dev_Num: unint8
+            recv_ID = int32(zeros(4,1)); % up to 4 devices
+            recv_rawData=uint8(zeros(32,1)); 
+            err=int32(0);
             if isempty(coder.target)
                 % Place simulation output code here
             else
                 % Call C-function implementing device output
                 %y = coder.ceval('source_output');
+                err=coder.ceval('batchMessage', canID_array, send_RawData, dev_Num, coder.ref(recv_ID), coder.ref(recv_rawData));
             end
         end
         
@@ -61,7 +70,7 @@ classdef Source < realtime.internal.SourceSampleTime & ...
                 % Place simulation termination code here
             else
                 % Call C-function implementing device termination
-                %coder.ceval('source_terminate');
+                coder.ceval('close_port');
             end
         end
     end
@@ -69,33 +78,41 @@ classdef Source < realtime.internal.SourceSampleTime & ...
     methods (Access=protected)
         %% Define output properties
         function num = getNumInputsImpl(~)
-            num = 0;
+            num = 3;
         end
         
         function num = getNumOutputsImpl(~)
-            num = 1;
+            num = 3;
         end
         
         function varargout = isOutputFixedSizeImpl(~,~)
             varargout{1} = true;
+            varargout{2} = true;
+            varargout{3} = true;
         end
         
         
         function varargout = isOutputComplexImpl(~)
             varargout{1} = false;
+            varargout{2} = false;
+            varargout{3} = false;
         end
         
         function varargout = getOutputSizeImpl(~)
+            varargout{1} = [4,1];
+            varargout{1} = [32,1];
             varargout{1} = [1,1];
         end
         
         function varargout = getOutputDataTypeImpl(~)
-            varargout{1} = 'double';
+            varargout{1} = 'int32';
+            varargout{2} = 'uint8';
+            varargout{3} = 'int32';
         end
         
         function icon = getIconImpl(~)
             % Define a string as the icon for the System block in Simulink.
-            icon = 'Source';
+            icon = 'CAN_Driver';
         end    
     end
     
@@ -111,7 +128,7 @@ classdef Source < realtime.internal.SourceSampleTime & ...
     
     methods (Static)
         function name = getDescriptiveName()
-            name = 'Source';
+            name = 'CAN_Driver';
         end
         
         function b = isSupportedContext(context)
@@ -126,8 +143,8 @@ classdef Source < realtime.internal.SourceSampleTime & ...
                 addIncludePaths(buildInfo,includeDir);
                 % Use the following API's to add include files, sources and
                 % linker flags
-                %addIncludeFiles(buildInfo,'source.h',includeDir);
-                %addSourceFiles(buildInfo,'source.c',srcDir);
+                addIncludeFiles(buildInfo,'can_motor_encoder.h',includeDir);
+                addSourceFiles(buildInfo,'can_motor_encoder.c',srcDir);
                 %addLinkFlags(buildInfo,{'-lSource'});
                 %addLinkObjects(buildInfo,'sourcelib.a',srcDir);
                 %addCompileFlags(buildInfo,{'-D_DEBUG=1'});

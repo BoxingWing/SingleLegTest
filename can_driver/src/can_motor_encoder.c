@@ -13,14 +13,14 @@
 #include "can_motor_encoder.h"
 
 int s; //socket handle
+struct can_frame send_frame;
+struct can_frame recv_frame;
 
 int canSetup(char* canPort)
 {
     struct sockaddr_can addr;
 	struct ifreq ifr;
-	struct can_frame send_frame;
 
-	struct can_frame recv_frame;
 
 	//printf("CAN Sockets Demo\r\n one-round send test\n");
 
@@ -44,7 +44,50 @@ int canSetup(char* canPort)
     return 0;
 }
 
-int batchMessage(int32_T* motor_canID_arry, uint8_T* motor_canRawData, uint8_T motorNum, int32_T encoder_canID, uint8_T encoder_canRawData, uint8_T encoderEN)
+int batchMessage(int32_T* canID_arry, uint8_T* send_RawData, uint8_T dev_Num, int32_T* recv_ID, uint8_T* rec_RawData)
 {
-    
+    int i;
+	int nbytes;
+	for (i=0;i<dev_Num;i++)
+	{
+		send_frame.can_id = canID_arry[i];
+		send_frame.can_dlc = 8;
+        send_frame.data[0] = send_RawData[i*8];
+		send_frame.data[1] = send_RawData[i*8+1];
+		send_frame.data[2] = send_RawData[i*8+2];
+		send_frame.data[3] = send_RawData[i*8+3];
+		send_frame.data[4] = send_RawData[i*8+4];
+		send_frame.data[5] = send_RawData[i*8+5];
+		send_frame.data[6] = send_RawData[i*8+6];
+		send_frame.data[7] = send_RawData[i*8+7];
+		if (write(s, &send_frame, sizeof(struct can_frame)) != sizeof(struct can_frame)) 
+		{
+			perror("Write");
+			return i+1;
+		}
+		
+		nbytes = read(s, &recv_frame, sizeof(struct can_frame));
+
+ 		if (nbytes < 0) {
+			perror("Read");
+			return i+11;
+		}
+		int ii；
+		for (ii=0;ii<recv_frame.can_dlc;ii++)
+			rec_RawData[i*8+ii]=recv_frame.data[ii];
+
+		recv_ID[i]=recv_frame.can_id;
+	}
+	}
+	return 0;
+}
+
+int close_port()
+{
+	if (close(s) < 0) {
+		perror("Close");
+		return 1;
+	}
+
+	return 0;
 }
