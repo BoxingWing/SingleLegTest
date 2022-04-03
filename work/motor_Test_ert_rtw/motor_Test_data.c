@@ -7,9 +7,9 @@
  *
  * Code generation for model "motor_Test".
  *
- * Model version              : 3.20
+ * Model version              : 3.63
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Thu Mar 24 16:26:16 2022
+ * C source code generated on : Wed Mar 30 16:59:54 2022
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -23,28 +23,28 @@
 
 /* Block parameters (default storage) */
 P_motor_Test_T motor_Test_P = {
-  /* Expression:  [0x94 0 0 0 0 0 0 0]
-   * Referenced by: '<Root>/read single loop angle'
+  /* Expression: 0
+   * Referenced by: '<Root>/Constant1'
    */
-  { 148U, 0U, 0U, 0U, 0U, 0U, 0U, 0U },
+  0.0,
 
-  /* Start of '<Root>/CAN Receive1' */
-  {
-    /* Expression: -1
-     * Referenced by: '<Root>/CAN Receive1'
-     */
-    -1.0
-  }
-  ,
+  /* Expression: 100
+   * Referenced by: '<Root>/Constant3'
+   */
+  100.0,
 
-  /* End of '<Root>/CAN Receive1' */
+  /* Expression: 2
+   * Referenced by: '<Root>/Constant4'
+   */
+  2.0,
 
-  /* Start of '<Root>/CAN Receive' */
-  {
-    /* Expression: -1
-     * Referenced by: '<Root>/CAN Receive'
-     */
-    -1.0
-  }
-  /* End of '<Root>/CAN Receive' */
+  /* Expression: 1
+   * Referenced by: '<Root>/Constant2'
+   */
+  1.0,
+
+  /* Expression: [0x142,0x142]
+   * Referenced by: '<Root>/Constant'
+   */
+  { 322U, 322U }
 };

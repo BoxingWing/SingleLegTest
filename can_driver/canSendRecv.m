@@ -1,7 +1,5 @@
 classdef canSendRecv < matlab.System & ...
-        coder.ExternalDependency ...
-        & matlab.system.mixin.Propagates ...
-        & matlab.system.mixin.CustomIcon
+        coder.ExternalDependency
     %
     % System object template for a source block.
     % 
@@ -18,11 +16,11 @@ classdef canSendRecv < matlab.System & ...
     %#ok<*EMCA>
     
     properties
-        canPort='can1';
+
     end
     
     properties (Nontunable)
-        % Public, non-tunable properties.
+         canPort='can1';
     end
     
     properties (Access = private)
@@ -45,7 +43,7 @@ classdef canSendRecv < matlab.System & ...
                 % Call C-function implementing device initialization
                 obj.canPort='can1';
                 coder.cinclude('can_motor_encoder.h');
-                coder.ceval('canSetup',obj.canPort);
+                coder.ceval('canSetup');
             end
         end
         
@@ -53,9 +51,12 @@ classdef canSendRecv < matlab.System & ...
             % canID_array: int32 *
             % send_RawData: uint8 *
             % dev_Num: unint8
+            canID_array=int32(canID_array);
+            send_RawData=uint8(send_RawData);
             recv_ID = int32(zeros(4,1)); % up to 4 devices
             recv_rawData=uint8(zeros(32,1)); 
             err=int32(0);
+            dev_Num=int32(dev_Num);
             if isempty(coder.target)
                 % Place simulation output code here
             else
@@ -100,8 +101,8 @@ classdef canSendRecv < matlab.System & ...
         
         function varargout = getOutputSizeImpl(~)
             varargout{1} = [4,1];
-            varargout{1} = [32,1];
-            varargout{1} = [1,1];
+            varargout{2} = [32,1];
+            varargout{3} = [1,1];
         end
         
         function varargout = getOutputDataTypeImpl(~)

@@ -7,9 +7,9 @@
  *
  * Code generation for model "motor_Test".
  *
- * Model version              : 3.20
+ * Model version              : 3.63
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Thu Mar 24 16:26:16 2022
+ * C source code generated on : Wed Mar 30 16:59:54 2022
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -31,343 +31,172 @@ DW_motor_Test_T motor_Test_DW;
 static RT_MODEL_motor_Test_T motor_Test_M_;
 RT_MODEL_motor_Test_T *const motor_Test_M = &motor_Test_M_;
 
-/* Forward declaration for local functions */
-static void motor_Test_SystemCore_setup(codertarget_raspi_internal_CA_T *obj,
-  B_CANReceive_motor_Test_T *localB);
-
-/* Forward declaration for local functions */
-static void motor_Test_SystemCore_setup_c(codertarget_raspi_internal__c_T *obj);
-static void motor_Test_SystemCore_setup(codertarget_raspi_internal_CA_T *obj,
-  B_CANReceive_motor_Test_T *localB)
-{
-  int32_T isCANSetup;
-  int32_T stat;
-  char_T errString3[20];
-  char_T canInterface[5];
-  static const char_T tmp[19] = { ' ', 'i', 's', ' ', 'n', 'o', 't', ' ', 'u',
-    'p', '.', ' ', 'S', 'e', 't', ' ', 'u', 'p', ' ' };
-
-  static const char_T tmp_0[14] = { ' ', 'i', 's', ' ', 'n', 'o', 't', ' ', 's',
-    'e', 't', ' ', 'u', 'p' };
-
-  static const char_T tmp_1[46] = { ' ', 'd', 'o', 'e', 's', ' ', 'n', 'o', 't',
-    ' ', 'e', 'x', 'i', 's', 't', '.', ' ', 'S', 'e', 'l', 'e', 'c', 't', ' ',
-    'a', ' ', 'v', 'a', 'l', 'i', 'd', ' ', 'C', 'A', 'N', ' ', 'i', 'n', 't',
-    'e', 'r', 'f', 'a', 'c', 'e', '.' };
-
-  static const char_T tmp_2[34] = { ' ', 'b', 'e', 'f', 'o', 'r', 'e', ' ', 'l',
-    'a', 'u', 'n', 'c', 'h', 'i', 'n', 'g', ' ', 't', 'h', 'e', ' ', 'a', 'p',
-    'p', 'l', 'i', 'c', 'a', 't', 'i', 'o', 'n', '.' };
-
-  obj->isSetupComplete = false;
-  obj->isInitialized = 1;
-  canInterface[0] = 'c';
-  canInterface[1] = 'a';
-  canInterface[2] = 'n';
-  canInterface[3] = '0';
-  canInterface[4] = '\x00';
-  stat = -1;
-  isCANSetup = MW_checkIFStatus(&canInterface[0]);
-  if (isCANSetup == 0) {
-    MW_createSocket(&canInterface[0], &obj->sockHandleDataFrames);
-    stat = MW_createSocket(&canInterface[0], &obj->sockHandleErrorFrames);
-  } else if (isCANSetup == 1) {
-    localB->errString1[0] = 'c';
-    localB->errString1[1] = 'a';
-    localB->errString1[2] = 'n';
-    localB->errString1[3] = '0';
-    for (isCANSetup = 0; isCANSetup < 19; isCANSetup++) {
-      localB->errString1[isCANSetup + 4] = tmp[isCANSetup];
-    }
-
-    localB->errString1[23] = 'c';
-    localB->errString1[24] = 'a';
-    localB->errString1[25] = 'n';
-    localB->errString1[26] = '0';
-    for (isCANSetup = 0; isCANSetup < 34; isCANSetup++) {
-      localB->errString1[isCANSetup + 27] = tmp_2[isCANSetup];
-    }
-
-    localB->errString1[61] = '\x0a';
-    localB->errString1[62] = '\x00';
-    MW_printError(&localB->errString1[0]);
-  } else if (isCANSetup == 2) {
-    localB->errString2[0] = 'c';
-    localB->errString2[1] = 'a';
-    localB->errString2[2] = 'n';
-    localB->errString2[3] = '0';
-    for (isCANSetup = 0; isCANSetup < 46; isCANSetup++) {
-      localB->errString2[isCANSetup + 4] = tmp_1[isCANSetup];
-    }
-
-    localB->errString2[50] = '\x0a';
-    localB->errString2[51] = '\x00';
-    MW_printError(&localB->errString2[0]);
-  } else {
-    errString3[0] = 'c';
-    errString3[1] = 'a';
-    errString3[2] = 'n';
-    errString3[3] = '0';
-    for (isCANSetup = 0; isCANSetup < 14; isCANSetup++) {
-      errString3[isCANSetup + 4] = tmp_0[isCANSetup];
-    }
-
-    errString3[18] = '\x0a';
-    errString3[19] = '\x00';
-    MW_printError(&errString3[0]);
-  }
-
-  obj->Initialized = (stat == 0);
-  obj->isSetupComplete = true;
-}
-
-/* Start for atomic system: */
-void motor_Test_CANReceive_Start(B_CANReceive_motor_Test_T *localB,
-  DW_CANReceive_motor_Test_T *localDW, P_CANReceive_motor_Test_T *localP)
-{
-  int32_T i;
-  static const char_T tmp[28] = { 'S', 't', 'a', 'n', 'd', 'a', 'r', 'd', ' ',
-    '(', '1', '1', '-', 'b', 'i', 't', ' ', 'i', 'd', 'e', 'n', 't', 'i', 'f',
-    'i', 'e', 'r', ')' };
-
-  /* Start for MATLABSystem: '<Root>/CAN Receive' */
-  localDW->obj.sockHandleDataFrames = 0;
-  localDW->obj.sockHandleErrorFrames = 0;
-  localDW->obj.isInitialized = 0;
-  localDW->obj.matlabCodegenIsDeleted = false;
-  localDW->objisempty = true;
-  for (i = 0; i < 28; i++) {
-    localDW->obj.IdentifierType[i] = tmp[i];
-  }
-
-  localDW->obj.SetIdentifierType = true;
-  localDW->obj.SampleTime = localP->CANReceive_SampleTime;
-  motor_Test_SystemCore_setup(&localDW->obj, localB);
-
-  /* End of Start for MATLABSystem: '<Root>/CAN Receive' */
-}
-
-/* Output and update for atomic system: */
-void motor_Test_CANReceive(B_CANReceive_motor_Test_T *localB,
-  DW_CANReceive_motor_Test_T *localDW, P_CANReceive_motor_Test_T *localP)
-{
-  int32_T i;
-  char_T b[28];
-  char_T rxInterface[5];
-  uint8_T rxData[8];
-  uint8_T extended;
-  uint8_T remote;
-  static const char_T tmp[28] = { 'E', 'x', 't', 'e', 'n', 'd', 'e', 'd', ' ',
-    '(', '2', '9', '-', 'b', 'i', 't', ' ', 'i', 'd', 'e', 'n', 't', 'i', 'f',
-    'i', 'e', 'r', ')' };
-
-  /* MATLABSystem: '<Root>/CAN Receive' */
-  if (localDW->obj.SampleTime != localP->CANReceive_SampleTime) {
-    localDW->obj.SampleTime = localP->CANReceive_SampleTime;
-  }
-
-  if (localDW->obj.Initialized) {
-    rxInterface[0] = 'c';
-    rxInterface[1] = 'a';
-    rxInterface[2] = 'n';
-    rxInterface[3] = '0';
-    rxInterface[4] = '\x00';
-    for (i = 0; i < 8; i++) {
-      rxData[i] = 0U;
-    }
-
-    extended = 0U;
-    for (i = 0; i < 28; i++) {
-      b[i] = tmp[i];
-    }
-
-    i = memcmp(&localDW->obj.IdentifierType[0], &b[0], 28);
-    if (i == 0) {
-      extended = 1U;
-    }
-
-    i = MW_CAN_receiveRawSimulink(&rxInterface[0], 321U, &rxData[0], 8,
-      &localB->CANReceive_o2, extended, &remote, &localB->CANReceive_o3,
-      localDW->obj.sockHandleDataFrames, localDW->obj.sockHandleErrorFrames);
-    if (i != 0) {
-      localDW->obj.Initialized = false;
-    }
-
-    for (i = 0; i < 8; i++) {
-      localB->recData[i] = rxData[i];
-    }
-  } else {
-    for (i = 0; i < 8; i++) {
-      localB->recData[i] = 0U;
-    }
-
-    /* MATLABSystem: '<Root>/CAN Receive' */
-    localB->CANReceive_o2 = 0U;
-
-    /* MATLABSystem: '<Root>/CAN Receive' */
-    localB->CANReceive_o3 = 0U;
-  }
-
-  /* End of MATLABSystem: '<Root>/CAN Receive' */
-}
-
-/* Termination for atomic system: */
-void motor_Test_CANReceive_Term(DW_CANReceive_motor_Test_T *localDW)
-{
-  char_T canInterface[5];
-
-  /* Terminate for MATLABSystem: '<Root>/CAN Receive' */
-  if (!localDW->obj.matlabCodegenIsDeleted) {
-    localDW->obj.matlabCodegenIsDeleted = true;
-    if ((localDW->obj.isInitialized == 1) && localDW->obj.isSetupComplete &&
-        localDW->obj.Initialized) {
-      canInterface[0] = 'c';
-      canInterface[1] = 'a';
-      canInterface[2] = 'n';
-      canInterface[3] = '0';
-      canInterface[4] = '\x00';
-      MW_clearSocket(&localDW->obj.sockHandleDataFrames, &canInterface[0]);
-      MW_clearSocket(&localDW->obj.sockHandleErrorFrames, &canInterface[0]);
-    }
-  }
-
-  /* End of Terminate for MATLABSystem: '<Root>/CAN Receive' */
-}
-
-static void motor_Test_SystemCore_setup_c(codertarget_raspi_internal__c_T *obj)
-{
-  int32_T isCANSetup;
-  int32_T stat1;
-  int32_T stat2;
-  char_T canInterface[5];
-  static const char_T tmp[19] = { ' ', 'i', 's', ' ', 'n', 'o', 't', ' ', 'u',
-    'p', '.', ' ', 'S', 'e', 't', ' ', 'u', 'p', ' ' };
-
-  static const char_T tmp_0[14] = { ' ', 'i', 's', ' ', 'n', 'o', 't', ' ', 's',
-    'e', 't', ' ', 'u', 'p' };
-
-  static const char_T tmp_1[46] = { ' ', 'd', 'o', 'e', 's', ' ', 'n', 'o', 't',
-    ' ', 'e', 'x', 'i', 's', 't', '.', ' ', 'S', 'e', 'l', 'e', 'c', 't', ' ',
-    'a', ' ', 'v', 'a', 'l', 'i', 'd', ' ', 'C', 'A', 'N', ' ', 'i', 'n', 't',
-    'e', 'r', 'f', 'a', 'c', 'e', '.' };
-
-  static const char_T tmp_2[34] = { ' ', 'b', 'e', 'f', 'o', 'r', 'e', ' ', 'l',
-    'a', 'u', 'n', 'c', 'h', 'i', 'n', 'g', ' ', 't', 'h', 'e', ' ', 'a', 'p',
-    'p', 'l', 'i', 'c', 'a', 't', 'i', 'o', 'n', '.' };
-
-  obj->isSetupComplete = false;
-  obj->isInitialized = 1;
-  canInterface[0] = 'c';
-  canInterface[1] = 'a';
-  canInterface[2] = 'n';
-  canInterface[3] = '0';
-  canInterface[4] = '\x00';
-  stat1 = -1;
-  stat2 = -1;
-  isCANSetup = MW_checkIFStatus(&canInterface[0]);
-  if (isCANSetup == 0) {
-    stat1 = MW_createSocket(&canInterface[0], &obj->sockHandleDataFrames);
-    stat2 = MW_createSocket(&canInterface[0], &obj->sockHandleErrorFrames);
-  } else if (isCANSetup == 1) {
-    motor_Test_B.errString1[0] = 'c';
-    motor_Test_B.errString1[1] = 'a';
-    motor_Test_B.errString1[2] = 'n';
-    motor_Test_B.errString1[3] = '0';
-    for (isCANSetup = 0; isCANSetup < 19; isCANSetup++) {
-      motor_Test_B.errString1[isCANSetup + 4] = tmp[isCANSetup];
-    }
-
-    motor_Test_B.errString1[23] = 'c';
-    motor_Test_B.errString1[24] = 'a';
-    motor_Test_B.errString1[25] = 'n';
-    motor_Test_B.errString1[26] = '0';
-    for (isCANSetup = 0; isCANSetup < 34; isCANSetup++) {
-      motor_Test_B.errString1[isCANSetup + 27] = tmp_2[isCANSetup];
-    }
-
-    motor_Test_B.errString1[61] = '\x0a';
-    motor_Test_B.errString1[62] = '\x00';
-    MW_printError(&motor_Test_B.errString1[0]);
-  } else if (isCANSetup == 2) {
-    motor_Test_B.errString2[0] = 'c';
-    motor_Test_B.errString2[1] = 'a';
-    motor_Test_B.errString2[2] = 'n';
-    motor_Test_B.errString2[3] = '0';
-    for (isCANSetup = 0; isCANSetup < 46; isCANSetup++) {
-      motor_Test_B.errString2[isCANSetup + 4] = tmp_1[isCANSetup];
-    }
-
-    motor_Test_B.errString2[50] = '\x0a';
-    motor_Test_B.errString2[51] = '\x00';
-    MW_printError(&motor_Test_B.errString2[0]);
-  } else {
-    motor_Test_B.errString3[0] = 'c';
-    motor_Test_B.errString3[1] = 'a';
-    motor_Test_B.errString3[2] = 'n';
-    motor_Test_B.errString3[3] = '0';
-    for (isCANSetup = 0; isCANSetup < 14; isCANSetup++) {
-      motor_Test_B.errString3[isCANSetup + 4] = tmp_0[isCANSetup];
-    }
-
-    motor_Test_B.errString3[18] = '\x0a';
-    motor_Test_B.errString3[19] = '\x00';
-    MW_printError(&motor_Test_B.errString3[0]);
-  }
-
-  if ((stat1 == 0) && (stat2 == 0)) {
-    obj->Initialized = true;
-  } else {
-    obj->Initialized = false;
-  }
-
-  obj->isSetupComplete = true;
-}
-
 /* Model step function */
 void motor_Test_step(void)
 {
-  int32_T ret;
-  char_T rxInterface[5];
-  uint8_T txData[8];
-  static const char_T tmp[28] = { 'S', 't', 'a', 'n', 'd', 'a', 'r', 'd', ' ',
-    '(', '1', '1', '-', 'b', 'i', 't', ' ', 'i', 'd', 'e', 'n', 't', 'i', 'f',
-    'i', 'e', 'r', ')' };
+  real_T tmp;
+  int32_T i;
+  int16_T y;
+  uint16_T canID_array[2];
+  uint16_T x;
+  uint8_T send_RawData[8];
+  uint8_T y_1[4];
+  uint8_T y_0[2];
+  boolean_T motor_stop;
 
-  motor_Test_CANReceive(&motor_Test_B.CANReceive, &motor_Test_DW.CANReceive,
-                        &motor_Test_P.CANReceive);
-  motor_Test_CANReceive(&motor_Test_B.CANReceive1, &motor_Test_DW.CANReceive1,
-                        &motor_Test_P.CANReceive1);
-
-  /* MATLABSystem: '<Root>/CAN Transmit' */
-  motor_Test_B.CANTransmit = 0U;
-
-  /* MATLABSystem: '<Root>/CAN Transmit' incorporates:
-   *  Constant: '<Root>/read single loop angle'
+  /* MATLABSystem: '<Root>/MATLAB System3' incorporates:
+   *  Constant: '<Root>/Constant4'
    */
-  if (motor_Test_DW.obj.Initialized) {
-    rxInterface[0] = 'c';
-    rxInterface[1] = 'a';
-    rxInterface[2] = 'n';
-    rxInterface[3] = '0';
-    rxInterface[4] = '\x00';
-    for (ret = 0; ret < 8; ret++) {
-      txData[ret] = motor_Test_P.readsingleloopangle_Value[ret];
+  /*  Implement algorithm. Calculate y as a function of input u and */
+  /*  discrete states. */
+  if (motor_Test_DW.obj_m.itr_count < 1.0) {
+    motor_Test_DW.obj_m.offset_Num = motor_Test_P.Constant4_Value;
+  }
+
+  for (i = 0; i < 8; i++) {
+    /* MATLABSystem: '<Root>/MATLAB System' incorporates:
+     *  MATLABSystem: '<Root>/MATLAB System3'
+     */
+    send_RawData[i] = 0U;
+  }
+
+  /* MATLABSystem: '<Root>/MATLAB System3' incorporates:
+   *  Constant: '<Root>/Constant1'
+   *  Constant: '<Root>/Constant3'
+   *  Constant: '<Root>/Constant4'
+   *  MATLABSystem: '<Root>/MATLAB System'
+   */
+  if (motor_Test_P.Constant4_Value != motor_Test_DW.obj_m.offset_Num) {
+    send_RawData[0] = 25U;
+    motor_Test_DW.obj_m.offset_Num = motor_Test_P.Constant4_Value;
+  } else {
+    send_RawData[0] = 164U;
+    tmp = floor(motor_Test_P.Constant3_Value);
+    if (tmp < 65536.0) {
+      if (tmp >= 0.0) {
+        x = (uint16_T)tmp;
+      } else {
+        x = 0U;
+      }
+    } else {
+      x = MAX_uint16_T;
     }
 
-    for (ret = 0; ret < 28; ret++) {
-      motor_Test_B.b[ret] = tmp[ret];
+    memcpy((void *)&y_0[0], (void *)&x, (uint32_T)((size_t)2 * sizeof(uint8_T)));
+    send_RawData[2] = y_0[0];
+    send_RawData[3] = y_0[1];
+    tmp = floor(motor_Test_P.Constant1_Value * 6.0 * 100.0);
+    if (tmp < 2.147483648E+9) {
+      if (tmp >= -2.147483648E+9) {
+        i = (int32_T)tmp;
+      } else {
+        i = MIN_int32_T;
+      }
+    } else {
+      i = MAX_int32_T;
     }
 
-    ret = memcmp(&motor_Test_DW.obj.IdentifierType[0], &motor_Test_B.b[0], 28);
-    ret = MW_CAN_transmitRaw(&rxInterface[0], (uint8_T)(ret == 0), 321U, 8,
-      &txData[0], 0, &motor_Test_B.CANTransmit, 0, 1.0,
-      motor_Test_DW.obj.sockHandleDataFrames,
-      motor_Test_DW.obj.sockHandleErrorFrames, (uint8_T)
-      motor_Test_DW.obj.notFirstStep);
-    if (ret != 0) {
-      motor_Test_DW.obj.Initialized = false;
+    memcpy((void *)&y_1[0], (void *)&i, (uint32_T)((size_t)4 * sizeof(uint8_T)));
+    send_RawData[4] = y_1[0];
+    send_RawData[5] = y_1[1];
+    send_RawData[6] = y_1[2];
+    send_RawData[7] = y_1[3];
+  }
+
+  if (motor_Test_DW.obj_m.itr_count < 100.0) {
+    motor_Test_DW.obj_m.itr_count++;
+  }
+
+  /* MATLABSystem: '<Root>/MATLAB System' incorporates:
+   *  Constant: '<Root>/Constant'
+   */
+  /*         %% Define output properties */
+  canID_array[0] = motor_Test_P.Constant_Value[0];
+  canID_array[1] = motor_Test_P.Constant_Value[1];
+
+  /* MATLABSystem: '<Root>/MATLAB System' */
+  /*  canID_array: int32 * */
+  /*  send_RawData: uint8 * */
+  /*  dev_Num: unint8 */
+  motor_Test_B.MATLABSystem_o1[0] = 0;
+  motor_Test_B.MATLABSystem_o1[1] = 0;
+  motor_Test_B.MATLABSystem_o1[2] = 0;
+  motor_Test_B.MATLABSystem_o1[3] = 0;
+
+  /*  up to 4 devices */
+  for (i = 0; i < 32; i++) {
+    /* MATLABSystem: '<Root>/MATLAB System' */
+    motor_Test_B.raw_Data[i] = 0U;
+  }
+
+  /* MATLABSystem: '<Root>/MATLAB System' incorporates:
+   *  Constant: '<Root>/Constant2'
+   */
+  /*  Call C-function implementing device output */
+  /* y = coder.ceval('source_output'); */
+  motor_Test_B.MATLABSystem_o3 = batchMessage(&canID_array[0], &send_RawData[0],
+    motor_Test_P.Constant2_Value, &motor_Test_B.MATLABSystem_o1[0],
+    &motor_Test_B.raw_Data[0]);
+
+  /* MATLAB Function: '<Root>/MATLAB Function' incorporates:
+   *  MATLABSystem: '<Root>/MATLAB System'
+   */
+  memcpy((void *)&x, (void *)&motor_Test_B.raw_Data[6], (uint32_T)((size_t)1 *
+          sizeof(uint16_T)));
+  motor_Test_B.y_l = (real_T)x / 65535.0 * 360.0;
+
+  /* MATLAB Function: '<Root>/MATLAB Function1' incorporates:
+   *  MATLABSystem: '<Root>/MATLAB System'
+   */
+  memcpy((void *)&y, (void *)&motor_Test_B.raw_Data[4], (uint32_T)((size_t)1 *
+          sizeof(int16_T)));
+  motor_Test_B.y = y;
+
+  /* MATLABSystem: '<Root>/MATLAB System1' */
+  /*  speed: unit in LSB */
+  if (!motor_Test_DW.obj.calibrated) {
+    /* MATLABSystem: '<Root>/MATLAB System1' */
+    motor_Test_B.abs_angle = 0.0;
+  } else {
+    tmp = motor_Test_B.y_l - motor_Test_DW.obj.sgl_angle_old;
+    if (tmp < -180.0) {
+      motor_Test_DW.obj.loop_count++;
+    } else if (tmp > 180.0) {
+      motor_Test_DW.obj.loop_count--;
+    }
+
+    /* MATLABSystem: '<Root>/MATLAB System1' */
+    motor_Test_B.abs_angle = motor_Test_B.y_l / 6.0 +
+      motor_Test_DW.obj.loop_count * 60.0;
+  }
+
+  if (!motor_Test_DW.obj.calibrated) {
+    motor_stop = true;
+    for (i = 0; i < 5; i++) {
+      motor_stop = ((fabs(motor_Test_DW.obj.speed_prev[i]) <= 20.0) &&
+                    motor_stop);
+    }
+
+    if (motor_stop && (motor_Test_P.Constant1_Value == 0.0)) {
+      if ((motor_Test_B.y_l >= 0.0) && (motor_Test_B.y_l <= 180.0)) {
+        motor_Test_DW.obj.loop_count = 0.0;
+      } else {
+        motor_Test_DW.obj.loop_count = -1.0;
+      }
+
+      motor_Test_DW.obj.calibrated = true;
     }
   }
+
+  motor_Test_DW.obj.sgl_angle_old = motor_Test_B.y_l;
+  motor_Test_DW.obj.speed_prev[0] = motor_Test_DW.obj.speed_prev[1];
+  motor_Test_DW.obj.speed_prev[1] = motor_Test_DW.obj.speed_prev[2];
+  motor_Test_DW.obj.speed_prev[2] = motor_Test_DW.obj.speed_prev[3];
+  motor_Test_DW.obj.speed_prev[3] = motor_Test_DW.obj.speed_prev[4];
+  motor_Test_DW.obj.speed_prev[4] = motor_Test_B.y;
+
+  /* MATLABSystem: '<Root>/MATLAB System1' */
+  motor_Test_B.calibration_res = motor_Test_DW.obj.calibrated;
 
   /* External mode */
   rtExtModeUploadCheckTrigger(1);
@@ -415,25 +244,27 @@ void motor_Test_initialize(void)
   /* initialize real-time model */
   (void) memset((void *)motor_Test_M, 0,
                 sizeof(RT_MODEL_motor_Test_T));
-  rtmSetTFinal(motor_Test_M, 120.0);
+  rtmSetTFinal(motor_Test_M, 300.0);
   motor_Test_M->Timing.stepSize0 = 0.005;
 
   /* External mode info */
-  motor_Test_M->Sizes.checksums[0] = (3708059588U);
-  motor_Test_M->Sizes.checksums[1] = (1633827381U);
-  motor_Test_M->Sizes.checksums[2] = (1178269841U);
-  motor_Test_M->Sizes.checksums[3] = (4142710368U);
+  motor_Test_M->Sizes.checksums[0] = (4192010471U);
+  motor_Test_M->Sizes.checksums[1] = (26077025U);
+  motor_Test_M->Sizes.checksums[2] = (4226899522U);
+  motor_Test_M->Sizes.checksums[3] = (2443765880U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
     static RTWExtModeInfo rt_ExtModeInfo;
-    static const sysRanDType *systemRan[4];
+    static const sysRanDType *systemRan[6];
     motor_Test_M->extModeInfo = (&rt_ExtModeInfo);
     rteiSetSubSystemActiveVectorAddresses(&rt_ExtModeInfo, systemRan);
     systemRan[0] = &rtAlwaysEnabled;
     systemRan[1] = &rtAlwaysEnabled;
     systemRan[2] = &rtAlwaysEnabled;
     systemRan[3] = &rtAlwaysEnabled;
+    systemRan[4] = &rtAlwaysEnabled;
+    systemRan[5] = &rtAlwaysEnabled;
     rteiSetModelMappingInfoPtr(motor_Test_M->extModeInfo,
       &motor_Test_M->SpecialInfo.mappingInfo);
     rteiSetChecksumsPtr(motor_Test_M->extModeInfo, motor_Test_M->Sizes.checksums);
@@ -450,54 +281,56 @@ void motor_Test_initialize(void)
 
   {
     int32_T i;
-    static const char_T tmp[28] = { 'S', 't', 'a', 'n', 'd', 'a', 'r', 'd', ' ',
-      '(', '1', '1', '-', 'b', 'i', 't', ' ', 'i', 'd', 'e', 'n', 't', 'i', 'f',
-      'i', 'e', 'r', ')' };
 
-    motor_Test_CANReceive_Start(&motor_Test_B.CANReceive,
-      &motor_Test_DW.CANReceive, &motor_Test_P.CANReceive);
-    motor_Test_CANReceive_Start(&motor_Test_B.CANReceive1,
-      &motor_Test_DW.CANReceive1, &motor_Test_P.CANReceive1);
-
-    /* Start for MATLABSystem: '<Root>/CAN Transmit' */
-    motor_Test_DW.obj.sockHandleDataFrames = 0;
-    motor_Test_DW.obj.sockHandleErrorFrames = 0;
-    motor_Test_DW.obj.notFirstStep = false;
-    motor_Test_DW.obj.isInitialized = 0;
-    motor_Test_DW.obj.matlabCodegenIsDeleted = false;
+    /* Start for MATLABSystem: '<Root>/MATLAB System3' */
+    motor_Test_DW.obj_m.offset_Num = 0.0;
+    motor_Test_DW.obj_m.itr_count = 0.0;
     motor_Test_DW.objisempty = true;
-    for (i = 0; i < 28; i++) {
-      motor_Test_DW.obj.IdentifierType[i] = tmp[i];
+
+    /* Start for MATLABSystem: '<Root>/MATLAB System' */
+    /*  Perform one-time calculations, such as computing constants */
+    /*  Constructor */
+    /*  Support name-value pair arguments when constructing the object. */
+    motor_Test_DW.obj_d.matlabCodegenIsDeleted = false;
+    motor_Test_DW.objisempty_c = true;
+    motor_Test_DW.obj_d.isInitialized = 1;
+
+    /*         %% Define output properties */
+    /*  Call C-function implementing device initialization */
+    canSetup();
+    motor_Test_DW.obj_d.isSetupComplete = true;
+
+    /* Start for MATLABSystem: '<Root>/MATLAB System1' */
+    motor_Test_DW.obj.calibrated = false;
+    motor_Test_DW.obj.loop_count = 0.0;
+    for (i = 0; i < 5; i++) {
+      motor_Test_DW.obj.speed_prev[i] = 99.0;
     }
 
-    motor_Test_DW.obj.SetIdentifierType = true;
-    motor_Test_SystemCore_setup_c(&motor_Test_DW.obj);
+    motor_Test_DW.obj.sgl_angle_old = 0.0;
+    motor_Test_DW.objisempty_m = true;
 
-    /* End of Start for MATLABSystem: '<Root>/CAN Transmit' */
+    /* End of Start for MATLABSystem: '<Root>/MATLAB System1' */
+
+    /* Start for ToAsyncQueueBlock generated from: '<Root>/MATLAB System1' */
+    /*  Perform one-time calculations, such as computing constants */
   }
+
+  /*  Initialize / reset discrete-state properties */
 }
 
 /* Model terminate function */
 void motor_Test_terminate(void)
 {
-  char_T canInterface[5];
-  motor_Test_CANReceive_Term(&motor_Test_DW.CANReceive);
-  motor_Test_CANReceive_Term(&motor_Test_DW.CANReceive1);
-
-  /* Terminate for MATLABSystem: '<Root>/CAN Transmit' */
-  if (!motor_Test_DW.obj.matlabCodegenIsDeleted) {
-    motor_Test_DW.obj.matlabCodegenIsDeleted = true;
-    if ((motor_Test_DW.obj.isInitialized == 1) &&
-        motor_Test_DW.obj.isSetupComplete && motor_Test_DW.obj.Initialized) {
-      canInterface[0] = 'c';
-      canInterface[1] = 'a';
-      canInterface[2] = 'n';
-      canInterface[3] = '0';
-      canInterface[4] = '\x00';
-      MW_clearSocket(&motor_Test_DW.obj.sockHandleDataFrames, &canInterface[0]);
-      MW_clearSocket(&motor_Test_DW.obj.sockHandleErrorFrames, &canInterface[0]);
+  /* Terminate for MATLABSystem: '<Root>/MATLAB System' */
+  if (!motor_Test_DW.obj_d.matlabCodegenIsDeleted) {
+    motor_Test_DW.obj_d.matlabCodegenIsDeleted = true;
+    if ((motor_Test_DW.obj_d.isInitialized == 1) &&
+        motor_Test_DW.obj_d.isSetupComplete) {
+      /*  Call C-function implementing device termination */
+      close_port();
     }
   }
 
-  /* End of Terminate for MATLABSystem: '<Root>/CAN Transmit' */
+  /* End of Terminate for MATLABSystem: '<Root>/MATLAB System' */
 }

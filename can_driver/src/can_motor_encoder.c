@@ -16,7 +16,7 @@ int s; //socket handle
 struct can_frame send_frame;
 struct can_frame recv_frame;
 
-int canSetup(char* canPort)
+int canSetup()
 {
     struct sockaddr_can addr;
 	struct ifreq ifr;
@@ -25,11 +25,11 @@ int canSetup(char* canPort)
 	//printf("CAN Sockets Demo\r\n one-round send test\n");
 
 	if ((s = socket(PF_CAN, SOCK_RAW, CAN_RAW)) < 0) {
-		perror("Socket");
+		//perror("Socket");
 		return 1;
 	}
 
-	strcpy(ifr.ifr_name, canPort );
+	strcpy(ifr.ifr_name, "can1" );
 	ioctl(s, SIOCGIFINDEX, &ifr);
 
 	memset(&addr, 0, sizeof(addr));
@@ -37,14 +37,14 @@ int canSetup(char* canPort)
 	addr.can_ifindex = ifr.ifr_ifindex;
 
 	if (bind(s, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
-		perror("Bind");
+		//perror("Bind");
 		return 1;
 	}
 
     return 0;
 }
 
-int batchMessage(int32_T* canID_arry, uint8_T* send_RawData, uint8_T dev_Num, int32_T* recv_ID, uint8_T* rec_RawData)
+int batchMessage(int32_t* canID_arry, uint8_t* send_RawData, int32_t dev_Num, int32_t* recv_ID, uint8_t* rec_RawData)
 {
     int i;
 	int nbytes;
@@ -62,30 +62,30 @@ int batchMessage(int32_T* canID_arry, uint8_T* send_RawData, uint8_T dev_Num, in
 		send_frame.data[7] = send_RawData[i*8+7];
 		if (write(s, &send_frame, sizeof(struct can_frame)) != sizeof(struct can_frame)) 
 		{
-			perror("Write");
+			//perror("Write");
 			return i+1;
 		}
 		
 		nbytes = read(s, &recv_frame, sizeof(struct can_frame));
 
  		if (nbytes < 0) {
-			perror("Read");
+			//perror("Read");
 			return i+11;
 		}
-		int ii；
+		int ii;
 		for (ii=0;ii<recv_frame.can_dlc;ii++)
 			rec_RawData[i*8+ii]=recv_frame.data[ii];
 
 		recv_ID[i]=recv_frame.can_id;
 	}
-	}
 	return 0;
 }
+	
 
 int close_port()
 {
 	if (close(s) < 0) {
-		perror("Close");
+		//sperror("Close");
 		return 1;
 	}
 

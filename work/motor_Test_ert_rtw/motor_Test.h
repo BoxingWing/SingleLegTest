@@ -7,9 +7,9 @@
  *
  * Code generation for model "motor_Test".
  *
- * Model version              : 3.20
+ * Model version              : 3.63
  * Simulink Coder version : 9.6 (R2021b) 14-May-2021
- * C source code generated on : Thu Mar 24 16:26:16 2022
+ * C source code generated on : Wed Mar 30 16:59:54 2022
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -20,19 +20,19 @@
 
 #ifndef RTW_HEADER_motor_Test_h_
 #define RTW_HEADER_motor_Test_h_
-#include <float.h>
+#include <math.h>
 #include <string.h>
+#include <float.h>
 #include <stddef.h>
 #ifndef motor_Test_COMMON_INCLUDES_
 #define motor_Test_COMMON_INCLUDES_
-#include <string.h>
 #include "rtwtypes.h"
 #include "rtw_extmode.h"
 #include "sysran_types.h"
 #include "rtw_continuous.h"
 #include "rtw_solver.h"
 #include "ext_work.h"
-#include "MW_SocketCAN.h"
+#include "can_motor_encoder.h"
 #endif                                 /* motor_Test_COMMON_INCLUDES_ */
 
 #include "motor_Test_types.h"
@@ -81,82 +81,72 @@
 #define rtmGetTPtr(rtm)                (&(rtm)->Timing.taskTime0)
 #endif
 
-/* Block signals for system '<Root>/CAN Receive' */
-typedef struct {
-  char_T errString1[63];
-  char_T errString2[52];
-  uint8_T recData[8];                  /* '<Root>/CAN Receive' */
-  uint8_T CANReceive_o2;               /* '<Root>/CAN Receive' */
-  uint8_T CANReceive_o3;               /* '<Root>/CAN Receive' */
-} B_CANReceive_motor_Test_T;
-
-/* Block states (default storage) for system '<Root>/CAN Receive' */
-typedef struct {
-  codertarget_raspi_internal_CA_T obj; /* '<Root>/CAN Receive' */
-  boolean_T objisempty;                /* '<Root>/CAN Receive' */
-} DW_CANReceive_motor_Test_T;
-
 /* Block signals (default storage) */
 typedef struct {
-  char_T errString1[63];
-  char_T errString2[52];
-  char_T b[28];
-  char_T errString3[20];
-  uint8_T CANTransmit;                 /* '<Root>/CAN Transmit' */
-  B_CANReceive_motor_Test_T CANReceive1;/* '<Root>/CAN Receive' */
-  B_CANReceive_motor_Test_T CANReceive;/* '<Root>/CAN Receive' */
+  real_T abs_angle;                    /* '<Root>/MATLAB System1' */
+  real_T y;                            /* '<Root>/MATLAB Function1' */
+  real_T y_l;                          /* '<Root>/MATLAB Function' */
+  int32_T MATLABSystem_o1[4];          /* '<Root>/MATLAB System' */
+  int32_T MATLABSystem_o3;             /* '<Root>/MATLAB System' */
+  uint8_T raw_Data[32];                /* '<Root>/MATLAB System' */
+  boolean_T calibration_res;           /* '<Root>/MATLAB System1' */
 } B_motor_Test_T;
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
-  codertarget_raspi_internal__c_T obj; /* '<Root>/CAN Transmit' */
+  MotorAngle_motor_Test_T obj;         /* '<Root>/MATLAB System1' */
+  posCtr_and_offset_motor_Test_T obj_m;/* '<Root>/MATLAB System3' */
+  canSendRecv_motor_Test_T obj_d;      /* '<Root>/MATLAB System' */
   struct {
     void *AQHandles;
-  } TAQSigLogging_InsertedFor_CANRe;   /* synthesized block */
+  } TAQSigLogging_InsertedFor_MATLA;   /* synthesized block */
 
   struct {
     void *AQHandles;
-  } TAQSigLogging_InsertedFor_CAN_b;   /* synthesized block */
+  } TAQSigLogging_InsertedFor_MAT_o;   /* synthesized block */
 
   struct {
     void *AQHandles;
-  } TAQSigLogging_InsertedFor_CAN_g;   /* synthesized block */
+  } TAQSigLogging_InsertedFor_MAT_e;   /* synthesized block */
 
   struct {
     void *AQHandles;
-  } TAQSigLogging_InsertedFor_CAN_m;   /* synthesized block */
+  } TAQSigLogging_InsertedFor_MAT_i;   /* synthesized block */
 
   struct {
     void *AQHandles;
-  } TAQSigLogging_InsertedFor_CAN_d;   /* synthesized block */
+  } TAQSigLogging_InsertedFor_MAT_a;   /* synthesized block */
 
   struct {
     void *AQHandles;
-  } TAQSigLogging_InsertedFor_CAN_j;   /* synthesized block */
+  } TAQSigLogging_InsertedFor_MAT_h;   /* synthesized block */
 
   struct {
     void *AQHandles;
-  } TAQSigLogging_InsertedFor_CANTr;   /* synthesized block */
+  } TAQSigLogging_InsertedFor_MAT_n;   /* synthesized block */
 
-  boolean_T objisempty;                /* '<Root>/CAN Transmit' */
-  DW_CANReceive_motor_Test_T CANReceive1;/* '<Root>/CAN Receive' */
-  DW_CANReceive_motor_Test_T CANReceive;/* '<Root>/CAN Receive' */
+  boolean_T objisempty;                /* '<Root>/MATLAB System3' */
+  boolean_T objisempty_m;              /* '<Root>/MATLAB System1' */
+  boolean_T objisempty_c;              /* '<Root>/MATLAB System' */
 } DW_motor_Test_T;
-
-/* Parameters for system: '<Root>/CAN Receive' */
-struct P_CANReceive_motor_Test_T_ {
-  real_T CANReceive_SampleTime;        /* Expression: -1
-                                        * Referenced by: '<Root>/CAN Receive'
-                                        */
-};
 
 /* Parameters (default storage) */
 struct P_motor_Test_T_ {
-  uint8_T readsingleloopangle_Value[8];/* Expression:  [0x94 0 0 0 0 0 0 0]
-                                        * Referenced by: '<Root>/read single loop angle'
+  real_T Constant1_Value;              /* Expression: 0
+                                        * Referenced by: '<Root>/Constant1'
                                         */
-  P_CANReceive_motor_Test_T CANReceive1;/* '<Root>/CAN Receive' */
-  P_CANReceive_motor_Test_T CANReceive;/* '<Root>/CAN Receive' */
+  real_T Constant3_Value;              /* Expression: 100
+                                        * Referenced by: '<Root>/Constant3'
+                                        */
+  real_T Constant4_Value;              /* Expression: 2
+                                        * Referenced by: '<Root>/Constant4'
+                                        */
+  real_T Constant2_Value;              /* Expression: 1
+                                        * Referenced by: '<Root>/Constant2'
+                                        */
+  uint16_T Constant_Value[2];          /* Expression: [0x142,0x142]
+                                        * Referenced by: '<Root>/Constant'
+                                        */
 };
 
 /* Real-time Model Data Structure */
@@ -230,5 +220,7 @@ extern RT_MODEL_motor_Test_T *const motor_Test_M;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'motor_Test'
+ * '<S1>'   : 'motor_Test/MATLAB Function'
+ * '<S2>'   : 'motor_Test/MATLAB Function1'
  */
 #endif                                 /* RTW_HEADER_motor_Test_h_ */
