@@ -16,14 +16,14 @@ classdef Multi_posCtr < matlab.System
         end
 
         function cmd = stepImpl(obj,pos_arr,speed_arr)
-            % Implement algorithm. Calculate y as a function of input u and
-            % discrete states.
+            % angle : single loop position, degree
+            % speed : speed after the reducer, degree per second
 
             cmd=uint8(zeros(24,1));
             for i=1:1:3
                 idx=i*8-7;
                 cmd(idx)=0xa4;
-                cmd(idx+2:idx+3)=typecast(uint16(floor(speed_arr(i))),'uint8');
+                cmd(idx+2:idx+3)=typecast(uint16(floor(speed_arr(i)*6)),'uint8');
                 cmd(idx+4:idx+7)=typecast(int32(floor(pos_arr(i)*6*100)),'uint8');
             end
             

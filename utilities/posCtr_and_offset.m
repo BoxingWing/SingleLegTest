@@ -17,8 +17,8 @@ classdef posCtr_and_offset < matlab.System
         end
 
         function cmd = stepImpl(obj,pos_des,speed_des,set_Offset_Num)
-            % Implement algorithm. Calculate y as a function of input u and
-            % discrete states.
+        % pos_des: degree of the final output, degree
+        % speed_des: speed of the final output, degree per second
             if obj.itr_count<1
                 obj.offset_Num=set_Offset_Num;
             end
@@ -28,7 +28,7 @@ classdef posCtr_and_offset < matlab.System
                 obj.offset_Num=set_Offset_Num;
             else
                 cmd(1)=0xa4;
-                cmd(3:4)=typecast(uint16(floor(speed_des)),'uint8');
+                cmd(3:4)=typecast(uint16(floor(speed_des*6)),'uint8');
                 cmd(5:8)=typecast(int32(floor(pos_des*6*100)),'uint8');
             end
             if obj.itr_count<100
