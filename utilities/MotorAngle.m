@@ -10,7 +10,7 @@ classdef MotorAngle < matlab.System
     properties(Access = private)
         calibrated=false;
         loop_count=0;
-        speed_prev=ones(5,1)*99;
+        speed_prev=ones(10,1)*99;
         sgl_angle_old=0;
     end
 
@@ -33,12 +33,15 @@ classdef MotorAngle < matlab.System
             end
             if obj.calibrated==false
                 motor_stop=true;
+                ava=0;
                 for i=1:1:length(obj.speed_prev)
-                    if abs(obj.speed_prev(i))<=20
-                        motor_stop=motor_stop && true;
-                    else
-                        motor_stop=motor_stop && false;
-                    end
+                    ava=ava+obj.speed_prev(i)^2;
+                end
+                ava=ava/length(obj.speed_prev);
+                if ava<0.02
+                    motor_stop=true;
+                else
+                    motor_stop=false;
                 end
                 if motor_stop==true && pos_des==0
                      if sgl_angle>=0 && sgl_angle<=180
