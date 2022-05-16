@@ -1,4 +1,4 @@
-function [Jac_pj,deltaPJ]=JacPJ_cal(theta2,theta3,encoderArry)
+function [Jac_pj,deltaPJ]=JacPJ_cal_webots(theta2,theta3,encoderArry)
    AC=0.2;
    BE=0.13;
    DG=0.2;
@@ -7,14 +7,13 @@ function [Jac_pj,deltaPJ]=JacPJ_cal(theta2,theta3,encoderArry)
    GH=0.2;
    CDG=3.2563;
    FGH=-3.1915;
-   %[pH,BDG,DGH]=LegFK(AC,BE,CD,CDG,DG,FG,FGH,GH,theta2,theta3);
-   [pH,CDGnow,FGHnow]=LegFK_v2(AC,BE,CD,encoderArry(1),DG,FG,encoderArry(2),GH,theta2,theta3);
+   [pH,BDG,DGH]=LegFK(AC,BE,CD,CDG,DG,FG,FGH,GH,theta2,theta3);
    pH
-   deltaPJ=[CDGnow-CDG;FGHnow-FGH]
-%    CDGnow=CDG+encoderArry(1)-BDG;
-%    FGHnow=FGH+encoderArry(2)-DGH;
-   %Jac_pj = LegJac_PJ(AC,BE,CDGnow,DG,FG,FGHnow,GH,theta2,theta3-pi/2);
-   Jac_pj = JacPJ_num(AC,BE,CD,CDGnow,DG,FG,FGHnow,GH,theta2,theta3);
+   deltaPJ=[encoderArry(1)-CDG;encoderArry(2)-FGH];
+   CDGnow=encoderArry(1);
+   FGHnow=encoderArry(2);
+   Jac_pj = LegJac_PJ(AC,BE,CDGnow,DG,FG,FGHnow,GH,theta2,theta3-pi/2);
+   %Jac_pj = JacPJ_num(AC,BE,CD,CDGnow,DG,FG,FGHnow,GH,theta2,theta3);
 end
 
 % subfunction
@@ -32,24 +31,6 @@ function [pH,BDG,DGH]=LegFK(AC,BE,CD,CDG,DG,FG,FGH,GH,theta1,theta2)
     pH=Rz2D(FGH)*GH/FG*(pF-pG)+pG;
     BDG=real(acos((pG-pD)'*(pD-pB)/AC/DG));
     DGH=real(-acos((pH-pG)'*(pG-pD)/DG/GH));
-end
-
-function [pH,CDGnow,FGHnow]=LegFK_v2(AC,BE,CD,BDG,DG,FG,DGH,GH,theta1,theta2)
-% BDG: angle from BD extension line to DG, normally positive
-% DGH: angle from DG extension line to GH, normally negative
-    theta2=theta2-pi/2;
-    pB=[0;0];
-    pD=Rz2D(theta1)*[0;-AC];
-    pA=Rz2D(theta2)*CD/AC*(pD-pB)+pB;
-    pC=pA+pD-pB;
-    pE=Rz2D(theta1)*[0;-BE];
-    pG=Rz2D(BDG)*DG/AC*(pD-pB)+pD;
-    pF=pE+pG-pD;
-    pH=Rz2D(DGH)*GH/DG*(pG-pD)+pG;
-    CDGnow=real(acos((pD-pB)'*(pC-pD)/AC/CD)+ acos((pD-pB)'*(pG-pD)/AC/DG));
-    FGHnow=real(-acos((pG-pD)'*(pF-pG)/DG/FG)-acos((pG-pD)'*(pH-pG)/DG/GH));
-%     BDG=real(acos((pG-pD)'*(pD-pB)/AC/DG));
-%     DGH=real(-acos((pH-pG)'*(pG-pD)/DG/GH));
 end
 
 function M=Rz2D(theta)

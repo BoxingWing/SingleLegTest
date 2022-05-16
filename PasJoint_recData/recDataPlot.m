@@ -1,8 +1,8 @@
 clear variables;close all;
-fileName='20220510T180042.mat';
+fileName='20220510T170419.mat';
 load(fileName);
-timeSeg=[21,24;44,48];
-
+%timeSeg=[21,24;44,48];
+timeFava=[5,10];
 % encoder clean
 Encoder_FB_new=Encoder_FB;
 for i=2:1:length(Encoder_FB_new(1,:))
@@ -65,8 +65,8 @@ figure()
 plot(time,fxyz(1,:),time,fxyz(2,:),time,fxyz(3,:));
 ylabel('f');legend('fx','fy','fz')
 
-answer=questdlg('append the cleaned encoder data and the timeSeg variable?','save quest','yes','no','no');
+answer=questdlg('Append the cleaned encoder data and the timeSeg variable?','save quest','yes','no','no');
 if strcmp(answer,'yes')
-    save(fileName,'timeSeg','Encoder_FB_new','-append');
+    save(fileName,'timeSeg','Encoder_FB_new','timeFava','-append');
 end
 
