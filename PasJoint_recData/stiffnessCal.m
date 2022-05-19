@@ -1,6 +1,6 @@
 clear variables;
 close all;
-fileName='20220510T170419.mat';
+fileName='20220510T170827.mat';
 load(fileName);
 Ntest=length(timeSeg(:,1));
 stiffness=zeros(2,Ntest);
@@ -17,6 +17,9 @@ nStart=tmp(1);
 tmp=find(time>tEnd);
 nEnd=tmp(1);
 fOff=sum(fxyz(:,nStart:nEnd),2)/(nEnd-nStart+1);
+encoder_Off=sum(Encoder_FB_new(:,nStart:nEnd),2)/(nEnd-nStart+1)- ...
+    sum(Encoder_Des(:,nStart:nEnd),2)/(nEnd-nStart+1);
+encoder_Off=encoder_Off*0;
 
 for i=1:1:Ntest
     tStart=timeSeg(i,1);
@@ -29,8 +32,13 @@ for i=1:1:Ntest
     motor_ag_ava(:,i)=sum(MotorAngle_FB(:,nStart:nEnd),2)/(nEnd-nStart+1)*(-1)/180*pi;
     encoder_ava(:,i)=sum(Encoder_FB_new(:,nStart:nEnd),2)/(nEnd-nStart+1);
     encoder_des_ava(:,i)=sum(Encoder_Des(:,nStart:nEnd),2)/(nEnd-nStart+1);
-    [Jac_pj,deltaPJ_cur]=JacPJ_cal(motor_ag_ava(2,i),motor_ag_ava(3,i),encoder_ava(:,i));
-    tauPJ=Jac_pj'*(-1)*[-(fEnd_ava(1)-fOff(1));(fEnd_ava(3)-fOff(3))]; % negetive fx or not???
+    
+%     tmp=encoder_ava(:,i);
+%     encoder_ava(1,i)=-tmp(2)+(-0.0496);
+%     encoder_ava(2,i)=-tmp(1)+(-0.0514);
+
+    [Jac_pj,deltaPJ_cur]=JacPJ_cal(motor_ag_ava(2,i),motor_ag_ava(3,i),encoder_ava(:,i)-encoder_Off);
+    tauPJ=Jac_pj'*(-1)*[(fEnd_ava(1)-fOff(1));(fEnd_ava(3)-fOff(3))]; % negetive fx or not???
     stiffness(1,i)=tauPJ(1)/deltaPJ_cur(1);
     stiffness(2,i)=tauPJ(2)/deltaPJ_cur(2);
     deltaPJ_ava(:,i)=deltaPJ_cur;

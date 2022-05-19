@@ -13,8 +13,8 @@ function [Jac_pj,deltaPJ]=JacPJ_cal(theta2,theta3,encoderArry)
    deltaPJ=[CDGnow-CDG;FGHnow-FGH]
 %    CDGnow=CDG+encoderArry(1)-BDG;
 %    FGHnow=FGH+encoderArry(2)-DGH;
-   %Jac_pj = LegJac_PJ(AC,BE,CDGnow,DG,FG,FGHnow,GH,theta2,theta3-pi/2);
-   Jac_pj = JacPJ_num(AC,BE,CD,CDGnow,DG,FG,FGHnow,GH,theta2,theta3);
+   Jac_pj = LegJac_PJ(AC,BE,CDGnow,DG,FG,FGHnow,GH,theta2,theta3-pi/2);
+   %Jac_pj = JacPJ_num(AC,BE,CD,CDGnow,DG,FG,FGHnow,GH,theta2,theta3);
 end
 
 % subfunction

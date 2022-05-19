@@ -1,36 +1,52 @@
-function [Jac_pj,deltaPJ]=JacPJ_cal_webots(theta2,theta3,encoderArry)
-   AC=0.2;
-   BE=0.13;
-   DG=0.2;
-   CD=0.07;
-   FG=AC-BE; % will be updated in the setup function
-   GH=0.2;
-   CDG=3.2563;
-   FGH=-3.1915;
-   [pH,BDG,DGH]=LegFK(AC,BE,CD,CDG,DG,FG,FGH,GH,theta2,theta3);
-   pH
-   deltaPJ=[encoderArry(1)-CDG;encoderArry(2)-FGH];
-   CDGnow=encoderArry(1);
-   FGHnow=encoderArry(2);
-   Jac_pj = LegJac_PJ(AC,BE,CDGnow,DG,FG,FGHnow,GH,theta2,theta3-pi/2);
-   %Jac_pj = JacPJ_num(AC,BE,CD,CDGnow,DG,FG,FGHnow,GH,theta2,theta3);
+function [Jac_pj,Jac_aj,deltaPJ]=JacPJ_cal_webots(theta2,theta3,encoderArry)
+AC=0.2;
+BE=0.13;
+DG=0.2;
+CD=0.07;
+FG=AC-BE; % will be updated in the setup function
+GH=0.2;
+CDG=pi;%3.2563;
+FGH=-pi;%-3.1915;
+CDGnow=encoderArry(1);
+FGHnow=encoderArry(2);
+
+[pH,BDG,DGH]=LegFK(AC,BE,CD,CDGnow,DG,FG,FGHnow,GH,theta2,theta3);
+pH
+deltaPJ=[encoderArry(1)-CDG;encoderArry(2)-FGH];
+
+Jac_aj=zeros(2,2);
+Jac_pj = LegJac_PJ(AC,BE,CDGnow,DG,FG,FGHnow,GH,theta2,theta3-pi/2);
+
+delta=10^-8;
+[pH,~,~]=LegFK(AC,BE,CD,CDGnow,DG,FG,FGHnow,GH,theta2,theta3);
+[pH1,~,~]=LegFK(AC,BE,CD,CDGnow+delta,DG,FG,FGHnow,GH,theta2,theta3);
+[pH2,~,~]=LegFK(AC,BE,CD,CDGnow,DG,FG,FGHnow+delta,GH,theta2,theta3);
+Jcol1=(pH1-pH)/delta;
+Jcol2=(pH2-pH)/delta;
+Jac_pj=[Jcol1,Jcol2];
+
+[pH1,~,~]=LegFK(AC,BE,CD,CDGnow,DG,FG,FGHnow,GH,theta2+delta,theta3);
+[pH2,~,~]=LegFK(AC,BE,CD,CDGnow,DG,FG,FGHnow,GH,theta2,theta3+delta);
+Jcol1=(pH1-pH)/delta;
+Jcol2=(pH2-pH)/delta;
+Jac_aj=[Jcol1,Jcol2];
 end
 
 % subfunction
 function [pH,BDG,DGH]=LegFK(AC,BE,CD,CDG,DG,FG,FGH,GH,theta1,theta2)
 % BDG: angle from BD extension line to DG, normally positive
 % DGH: angle from DG extension line to GH, normally negative
-    theta2=theta2-pi/2;
-    pB=[0;0];
-    pD=Rz2D(theta1)*[0;-AC];
-    pA=Rz2D(theta2)*CD/AC*(pD-pB)+pB;
-    pC=pA+pD-pB;
-    pE=Rz2D(theta1)*[0;-BE];
-    pG=Rz2D(CDG)*DG/CD*(pC-pD)+pD;
-    pF=pE+pG-pD;
-    pH=Rz2D(FGH)*GH/FG*(pF-pG)+pG;
-    BDG=real(acos((pG-pD)'*(pD-pB)/AC/DG));
-    DGH=real(-acos((pH-pG)'*(pG-pD)/DG/GH));
+theta2=theta2-pi/2;
+pB=[0;0];
+pD=Rz2D(theta1)*[0;-AC];
+pA=Rz2D(theta2)*CD/AC*(pD-pB)+pB;
+pC=pA+pD-pB;
+pE=Rz2D(theta1)*[0;-BE];
+pG=Rz2D(CDG)*DG/CD*(pC-pD)+pD;
+pF=pE+pG-pD;
+pH=Rz2D(FGH)*GH/FG*(pF-pG)+pG;
+BDG=real(acos((pG-pD)'*(pD-pB)/AC/DG));
+DGH=real(-acos((pH-pG)'*(pG-pD)/DG/GH));
 end
 
 function M=Rz2D(theta)

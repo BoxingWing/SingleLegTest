@@ -10,8 +10,12 @@ pE=Rz2D(theta1)*[0;-BE];
 pG=Rz2D(CDG)*DG/CD*(pC-pD)+pD;
 pF=pE+pG-pD;
 pH=Rz2D(FGH)*GH/FG*(pF-pG)+pG;
-dpH=simplify(jacobian(pH,[theta1,theta2]));
-dpH_pj=simplify(jacobian(pH,[CDG,FGH]));
+pDGm=0.5*(pD+pG);
+pGHm=0.5*(pG+pH);
+dpH=simplify(jacobian(pH,[theta1,theta2]))
+dpH_pj=simplify(jacobian(pH,[CDG,FGH]))
+dpDGm=simplify(jacobian(pDGm,[CDG,FGH]))
+dpGHm=simplify(jacobian(pGHm,[CDG,FGH]))
 
 %  matlabFunction(dpH_pj,'File','LegJac_PJ');
 
