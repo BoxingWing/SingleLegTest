@@ -1,5 +1,5 @@
-classdef Multi_posCtr < matlab.System
-    % position control for 3 motors
+classdef Sgl_posCtr < matlab.System
+    % position control for 1 motors
 
 
     % Pre-computed constants
@@ -12,18 +12,18 @@ classdef Multi_posCtr < matlab.System
             % Perform one-time calculations, such as computing constants
         end
 
-        function cmd = stepImpl(obj,pos_arr,speed_arr)
+        function cmd = stepImpl(obj,pos,speed,calFlag)
             % angle : position after the reducer, degree
             % speed : speed after the reducer, degree per second
-
-            cmd=uint8(zeros(24,1));
-            for i=1:1:3
-                idx=i*8-7;
-                cmd(idx)=0xa4;
-                cmd(idx+2:idx+3)=typecast(uint16(floor(speed_arr(i)*6)),'uint8');
-                cmd(idx+4:idx+7)=typecast(int32(floor(pos_arr(i)*6*100)),'uint8');
+            if calFlag<0.5
+                pos=0;
+                speed=8;
             end
-            
+            cmd=uint8(zeros(8,1));
+            idx=1;
+            cmd(idx)=0xa4;
+            cmd(idx+2:idx+3)=typecast(uint16(floor(speed*6)),'uint8');
+            cmd(idx+4:idx+7)=typecast(int32(floor(pos*6*100)),'uint8');
 
         end
 
@@ -34,20 +34,20 @@ classdef Multi_posCtr < matlab.System
         function num = getNumOutputsImpl(~)
             num = 1;
         end
-        
+
         function varargout = isOutputFixedSizeImpl(~,~)
             varargout{1} = true;
         end
-        
-        
+
+
         function varargout = isOutputComplexImpl(~)
             varargout{1} = false;
         end
-        
+
         function varargout = getOutputSizeImpl(~)
-            varargout{1} = [24,1];
+            varargout{1} = [8,1];
         end
-        
+
         function varargout = getOutputDataTypeImpl(~)
             varargout{1} = 'uint8';
         end
