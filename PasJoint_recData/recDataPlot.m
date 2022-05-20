@@ -1,8 +1,9 @@
 clear variables;close all;
 fileName='20220510T180042.mat';
 load(fileName);
-timeSeg=[21,24;44,48];
-
+%timeSeg=[21,24;44,48];
+%timeSeg=[87,90;115,118;153,156];
+timeFava=[10,15];
 % encoder clean
 Encoder_FB_new=Encoder_FB;
 for i=2:1:length(Encoder_FB_new(1,:))
@@ -57,7 +58,7 @@ ylabel('Encoder1');xlabel('time')
 legend('FB','Des')
 subplot(2,1,2)
 plot(time,Encoder_FB(2,:),time,Encoder_Des(2,:));
-ylabel('Encoder1');xlabel('time')
+ylabel('Encoder2');xlabel('time')
 legend('FB','Des');
 
 % plot contact force
@@ -65,8 +66,8 @@ figure()
 plot(time,fxyz(1,:),time,fxyz(2,:),time,fxyz(3,:));
 ylabel('f');legend('fx','fy','fz')
 
-answer=questdlg('append the cleaned encoder data and the timeSeg variable?','save quest','yes','no','no');
+answer=questdlg('Append the cleaned encoder data, timeFava and the timeSeg variable?','save quest','yes','no','no');
 if strcmp(answer,'yes')
-    save(fileName,'timeSeg','Encoder_FB_new','-append');
+    save(fileName,'timeSeg','Encoder_FB_new','timeFava','-append');
 end
 
