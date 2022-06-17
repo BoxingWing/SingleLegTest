@@ -3,6 +3,7 @@ syms theta1 theta2 real;
 syms AC BE DG CD FG GH positive;
 syms CDG FGH BDG DGH real;
 pB=[0;0];
+FG=AC-BE;
 pD=Rz2D(theta1)*[0;-AC];
 pA=Rz2D(theta2)*CD/AC*(pD-pB)+pB;
 pC=pA+pD-pB;
@@ -14,10 +15,18 @@ pDGm=0.5*(pD+pG);
 pGHm=0.5*(pG+pH);
 dpH=simplify(jacobian(pH,[theta1,theta2]))
 dpH_pj=simplify(jacobian(pH,[CDG,FGH]))
-dpDGm=simplify(jacobian(pDGm,[CDG,FGH]))
-dpGHm=simplify(jacobian(pGHm,[CDG,FGH]))
+% dpDGm=simplify(jacobian(pDGm,[CDG,FGH]))
+% dpGHm=simplify(jacobian(pGHm,[CDG,FGH]))
+dpH_AllFour=simplify(jacobian(pH,[theta1,theta2,CDG,FGH]));
+Jac=dpH_AllFour(1:2,1:2);
+Jpj=dpH_AllFour(1:2,3:4);
+Jcp=simplify(Jac\Jpj);
 
-%  matlabFunction(dpH_pj,'File','LegJac_PJ');
+%matlabFunction(Jcp,'File','LegJac_Jcp');
+
+% matlabFunction(dpH_pj,'File','LegJac_PJ');
+% matlabFunction(dpDGm,'File','LegJac_pDGm');
+% matlabFunction(dpGHm,'File','LegJac_pGHm');
 
 % matlabFunction(pH,'File','LegFK');
 % matlabFunction(dpH,'File','LegJac');
