@@ -20,59 +20,64 @@ GET DAQ RESOLUTION INFO
 * Max STIM ODT Entry size:          255
 * Timestamp Mode =                  34H
 * Timestamp Ticks =                 1
-SHORT_UPLOAD: reading at address 0x323a0
-SHORT_DOWNLOAD: writing at address 0x32268
-SHORT_DOWNLOAD: writing at address 0x323e4
-SHORT_UPLOAD: reading at address 0x323c4
-SHORT_UPLOAD: reading at address 0x32384
-SHORT_UPLOAD: reading at address 0x32388
-SHORT_UPLOAD: reading at address 0x3238c
-SHORT_UPLOAD: reading at address 0x32390
-SHORT_UPLOAD: reading at address 0x32394
-SHORT_UPLOAD: reading at address 0x32378
+SHORT_UPLOAD: reading at address 0x343c0
+SHORT_DOWNLOAD: writing at address 0x34288
+SHORT_DOWNLOAD: writing at address 0x34404
+SHORT_UPLOAD: reading at address 0x343e4
+SHORT_UPLOAD: reading at address 0x343a4
+SHORT_UPLOAD: reading at address 0x343a8
+SHORT_UPLOAD: reading at address 0x343ac
+SHORT_UPLOAD: reading at address 0x343b0
+SHORT_UPLOAD: reading at address 0x343b4
+SHORT_UPLOAD: reading at address 0x34398
 FREE_DAQ: clearing existing dynamic DAQ lists
 ALLOC_DAQ: allocating 1 DAQ lists
 ALLOC_ODT: allocating 1 ODTs in DAQ list 0
-ALLOC_ODT_ENTRY: allocating 6 ODT Entries in DAQ list 0 ODT 0
+ALLOC_ODT_ENTRY: allocating 7 ODT Entries in DAQ list 0 ODT 0
 SET_DAQ_PTR: updating current ODT entry pointer to DAQ 0, ODT 0, Entry 0
-XCP_WRITE_DAQ: writing DAQ 0 ODT 0 Entry 0: bitOffset = ffH size = 24 addressExtension = 0H address = 139ae8H
+XCP_WRITE_DAQ: writing DAQ 0 ODT 0 Entry 0: bitOffset = ffH size = 24 addressExtension = 0H address = 13bc58H
 SET_DAQ_PTR: updating current ODT entry pointer to DAQ 0, ODT 0, Entry 1
-XCP_WRITE_DAQ: writing DAQ 0 ODT 0 Entry 1: bitOffset = ffH size = 24 addressExtension = 0H address = 139b58H
+XCP_WRITE_DAQ: writing DAQ 0 ODT 0 Entry 1: bitOffset = ffH size = 24 addressExtension = 0H address = 13bcc8H
 SET_DAQ_PTR: updating current ODT entry pointer to DAQ 0, ODT 0, Entry 2
-XCP_WRITE_DAQ: writing DAQ 0 ODT 0 Entry 2: bitOffset = ffH size = 16 addressExtension = 0H address = 139b48H
+XCP_WRITE_DAQ: writing DAQ 0 ODT 0 Entry 2: bitOffset = ffH size = 16 addressExtension = 0H address = 13bce0H
 SET_DAQ_PTR: updating current ODT entry pointer to DAQ 0, ODT 0, Entry 3
-XCP_WRITE_DAQ: writing DAQ 0 ODT 0 Entry 3: bitOffset = ffH size = 16 addressExtension = 0H address = 139b70H
+XCP_WRITE_DAQ: writing DAQ 0 ODT 0 Entry 3: bitOffset = ffH size = 16 addressExtension = 0H address = 13bda0H
 SET_DAQ_PTR: updating current ODT entry pointer to DAQ 0, ODT 0, Entry 4
-XCP_WRITE_DAQ: writing DAQ 0 ODT 0 Entry 4: bitOffset = ffH size = 16 addressExtension = 0H address = 139b80H
+XCP_WRITE_DAQ: writing DAQ 0 ODT 0 Entry 4: bitOffset = ffH size = 16 addressExtension = 0H address = 13bdb0H
 SET_DAQ_PTR: updating current ODT entry pointer to DAQ 0, ODT 0, Entry 5
-XCP_WRITE_DAQ: writing DAQ 0 ODT 0 Entry 5: bitOffset = ffH size = 8 addressExtension = 0H address = 139bf0H
+XCP_WRITE_DAQ: writing DAQ 0 ODT 0 Entry 5: bitOffset = ffH size = 16 addressExtension = 0H address = 13bcb8H
+SET_DAQ_PTR: updating current ODT entry pointer to DAQ 0, ODT 0, Entry 6
+XCP_WRITE_DAQ: writing DAQ 0 ODT 0 Entry 6: bitOffset = ffH size = 8 addressExtension = 0H address = 13bd80H
 SET_DAQ_LIST_MODE: setting DAQ list 0: mode = 10H, eventId = 0, prescaler = 0, priority = 0
 START_STOP_DAQ_LIST: selected DAQ list 0
 START_STOP_SYNCH: starting DAQ list 0
-SHORT_DOWNLOAD: writing at address 0x321a8
-SHORT_DOWNLOAD: writing at address 0x321b0
-SHORT_DOWNLOAD: writing at address 0x321b8
-SHORT_DOWNLOAD: writing at address 0x321c0
-SHORT_DOWNLOAD: writing at address 0x321c8
-SHORT_DOWNLOAD: writing at address 0x321d0
-SHORT_DOWNLOAD: writing at address 0x321d8
-SHORT_DOWNLOAD: writing at address 0x321e0
-SHORT_DOWNLOAD: writing at address 0x321e8
-SHORT_DOWNLOAD: writing at address 0x32200
-SHORT_DOWNLOAD: writing at address 0x32218
-SHORT_DOWNLOAD: writing at address 0x32228
-SHORT_DOWNLOAD: writing at address 0x32230
-SHORT_DOWNLOAD: writing at address 0x32238
-SHORT_DOWNLOAD: writing at address 0x32248
-SHORT_DOWNLOAD: writing at address 0x32250
-SHORT_DOWNLOAD: writing at address 0x32254
-SHORT_DOWNLOAD: writing at address 0x32258
-SHORT_DOWNLOAD: writing at address 0x323b4
-SHORT_DOWNLOAD: writing at address 0x323e8
-SHORT_DOWNLOAD: writing at address 0x3226c
-SHORT_UPLOAD: reading at address 0x32378
-SHORT_DOWNLOAD: writing at address 0x32268
-SHORT_DOWNLOAD: writing at address 0x32381
+SHORT_DOWNLOAD: writing at address 0x341b0
+SHORT_DOWNLOAD: writing at address 0x341b8
+SHORT_DOWNLOAD: writing at address 0x341c0
+SHORT_DOWNLOAD: writing at address 0x341c8
+SHORT_DOWNLOAD: writing at address 0x341d0
+SHORT_DOWNLOAD: writing at address 0x341d8
+SHORT_DOWNLOAD: writing at address 0x341e0
+SHORT_DOWNLOAD: writing at address 0x341e8
+SHORT_DOWNLOAD: writing at address 0x341f0
+SHORT_DOWNLOAD: writing at address 0x341f8
+SHORT_DOWNLOAD: writing at address 0x34200
+SHORT_DOWNLOAD: writing at address 0x34208
+SHORT_DOWNLOAD: writing at address 0x34220
+SHORT_DOWNLOAD: writing at address 0x34238
+SHORT_DOWNLOAD: writing at address 0x34248
+SHORT_DOWNLOAD: writing at address 0x34250
+SHORT_DOWNLOAD: writing at address 0x34258
+SHORT_DOWNLOAD: writing at address 0x34268
+SHORT_DOWNLOAD: writing at address 0x34270
+SHORT_DOWNLOAD: writing at address 0x34274
+SHORT_DOWNLOAD: writing at address 0x34278
+SHORT_DOWNLOAD: writing at address 0x343d4
+SHORT_DOWNLOAD: writing at address 0x34408
+SHORT_DOWNLOAD: writing at address 0x3428c
+SHORT_UPLOAD: reading at address 0x34398
+SHORT_DOWNLOAD: writing at address 0x34288
+SHORT_DOWNLOAD: writing at address 0x343a1
 
 ** starting the model **
 Overrun detected: The sample time for the rate 0 is too short.
@@ -100,6 +105,7 @@ Overrun detected: The sample time for the rate 0 is too short.
 Overrun detected: The sample time for the rate 0 is too short.
 Overrun detected: The sample time for the rate 0 is too short.
 Overrun detected: The sample time for the rate 0 is too short.
+SHORT_DOWNLOAD: writing at address 0x341f8
 Overrun detected: The sample time for the rate 0 is too short.
 Overrun detected: The sample time for the rate 0 is too short.
 Overrun detected: The sample time for the rate 0 is too short.
@@ -110,46 +116,8 @@ Overrun detected: The sample time for the rate 0 is too short.
 Overrun detected: The sample time for the rate 0 is too short.
 Overrun detected: The sample time for the rate 0 is too short.
 Overrun detected: The sample time for the rate 0 is too short.
+SHORT_DOWNLOAD: writing at address 0x341f8
 Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-SHORT_DOWNLOAD: writing at address 0x321d8
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-SHORT_DOWNLOAD: writing at address 0x321b0
-SHORT_DOWNLOAD: writing at address 0x321b8
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-Overrun detected: The sample time for the rate 0 is too short.
-SHORT_DOWNLOAD: writing at address 0x321d8
-Overrun detected: The sample time for the rate 0 is too short.
-SHORT_DOWNLOAD: writing at address 0x32382
+SHORT_DOWNLOAD: writing at address 0x343a2
 START_STOP_SYNCH: stopping DAQ list 0
 DISCONNECT: entering XCP_DISCONNECTED status

@@ -8,10 +8,14 @@ close all;
 load sl_dataRec1.mat;
 load sl_dataRec2.mat;
 load sl_dataRec3.mat;
-time=MotorAngle_cab_Encoder(1,:);
-MotorAngle_FB=MotorAngle_cab_Encoder(2:4,:);
-MotorCab=MotorAngle_cab_Encoder(5:7,:);
-Encoder_FB=MotorAngle_cab_Encoder(8:9,:);
+time=MotorAngle_cab_Encoder_motorSpeed_motorCurrent_fe_td(1,:);
+MotorAngle_FB=MotorAngle_cab_Encoder_motorSpeed_motorCurrent_fe_td(2:4,:);
+MotorCab=MotorAngle_cab_Encoder_motorSpeed_motorCurrent_fe_td(5:7,:);
+Encoder_FB=MotorAngle_cab_Encoder_motorSpeed_motorCurrent_fe_td(8:9,:);
+MotorSpeed_FB=MotorAngle_cab_Encoder_motorSpeed_motorCurrent_fe_td(10:12,:);
+MotorCurrent_FB=MotorAngle_cab_Encoder_motorSpeed_motorCurrent_fe_td(13:15,:);
+fe_FB=MotorAngle_cab_Encoder_motorSpeed_motorCurrent_fe_td(16:17,:);
+td_FB=MotorAngle_cab_Encoder_motorSpeed_motorCurrent_fe_td(18,:);
 pH_Des=pEnd_AngleSegDeg_pHFB_FKPJ(2:3,:);
 MotorAngle_Des=pEnd_AngleSegDeg_pHFB_FKPJ(4:6,:);
 pH_FB=pEnd_AngleSegDeg_pHFB_FKPJ(7:8,:);
@@ -31,6 +35,12 @@ plot(time,pH_FB(2,:),time,pH_Des(2,:));
 ylabel('pHy');xlabel('time');
 legend('FB','Des');
 
+% plot foot end force
+figure()
+plot(time,fe_FB(1,:),time,fe_FB(2,:));
+ylabel('fe');xlabel('time');
+legend('fx','fz');
+
 % plot motor angle
 figure()
 subplot(3,1,1)
@@ -45,6 +55,31 @@ subplot(3,1,3)
 plot(time,MotorAngle_FB(3,:),time,MotorAngle_Des(3,:));
 ylabel('motorAngle3');xlabel('time');
 legend('FB','Des');
+
+% plot motor speed
+figure()
+subplot(3,1,1)
+plot(time,MotorSpeed_FB(1,:));
+ylabel('motorSpeed1');xlabel('time');
+subplot(3,1,2)
+plot(time,MotorSpeed_FB(2,:));
+ylabel('motorSpeed2');xlabel('time');
+subplot(3,1,3)
+plot(time,MotorSpeed_FB(3,:));
+ylabel('motorSpeed3');xlabel('time');
+
+% plot motor current
+figure()
+subplot(3,1,1)
+plot(time,MotorCurrent_FB(1,:));
+ylabel('motorCurrent1');xlabel('time');
+subplot(3,1,2)
+plot(time,MotorCurrent_FB(2,:));
+ylabel('motorCurrent2');xlabel('time');
+subplot(3,1,3)
+plot(time,MotorCurrent_FB(3,:));
+ylabel('motorCurrent3');xlabel('time');
+
 
 % plot passive joint
 figure();

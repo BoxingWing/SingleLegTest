@@ -6,6 +6,7 @@ classdef jump_OP< matlab.System
         tDown=0.15;
         Amp=0;
         AmpOff=-0.5;
+        tEndWait=1;
     end
 
     properties(Nontunable)
@@ -21,6 +22,7 @@ classdef jump_OP< matlab.System
     properties(Access = private)
         PhaseOld;
         ENOld=0;
+        countDown=0;
     end
     
     methods(Access = protected)
@@ -49,6 +51,7 @@ classdef jump_OP< matlab.System
         function setupImpl(obj)
             %obj.Count = 0;
             obj.ENOld=0;
+            obj.countDown=floor(obj.tEndWait/obj.SampleTime);
         end
 
         function resetImpl(obj)
@@ -61,8 +64,12 @@ classdef jump_OP< matlab.System
                 obj.ENOld=ENNum;
             end
             if obj.PhaseOld>=pi && obj.ENOld~=ENNum
-                obj.ENOld=ENNum;
-                obj.PhaseOld=0;
+                obj.countDown=obj.countDown-1;
+                if obj.countDown==0
+                    obj.PhaseOld=0;
+                    obj.ENOld=ENNum;
+                    obj.countDown=floor(obj.tEndWait/obj.SampleTime);
+                end
             end
             if obj.ENOld~=ENNum
                 isStill=0;

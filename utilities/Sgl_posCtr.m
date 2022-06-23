@@ -24,7 +24,6 @@ classdef Sgl_posCtr < matlab.System
             cmd(idx)=0xa4;
             cmd(idx+2:idx+3)=typecast(uint16(floor(speed*6)),'uint8');
             cmd(idx+4:idx+7)=typecast(int32(floor(pos*6*100)),'uint8');
-
         end
 
         function resetImpl(obj)
