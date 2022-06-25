@@ -16,7 +16,7 @@ classdef Multi_posCtr < matlab.System
             % angle : position after the reducer, degree
             % speed : speed after the reducer, degree per second
 
-            cmd=uint8(zeros(24,1));
+            cmd=uint8(zeros(32,1));
             for i=1:1:3
                 idx=i*8-7;
                 cmd(idx)=0xa4;
@@ -45,7 +45,7 @@ classdef Multi_posCtr < matlab.System
         end
         
         function varargout = getOutputSizeImpl(~)
-            varargout{1} = [24,1];
+            varargout{1} = [32,1];
         end
         
         function varargout = getOutputDataTypeImpl(~)

@@ -46,7 +46,7 @@ classdef FK_sgl < matlab.System
         else
             td=0;
         end
-        if abs(encoderArray(1)-BDG)>0.4 && abs(encoderArray(2)-DGH)>0.4 && ...
+        if abs(encoderArray(1)-BDG)>30/180*pi && abs(encoderArray(2)-DGH)>30/180*pi && ...
                 sum(motorCab)>2.5
             obj.STO=1;
         end

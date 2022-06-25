@@ -62,7 +62,8 @@ classdef canSendRecv < matlab.System & ...
             else
                 % Call C-function implementing device output
                 %y = coder.ceval('source_output');
-                err=coder.ceval('batchMessage', canID_array, send_RawData, dev_Num, coder.ref(recv_ID), coder.ref(recv_rawData));
+                err=coder.ceval('batchMessage', coder.ref(canID_array), coder.ref(send_RawData), ...
+                    dev_Num, coder.ref(recv_ID), coder.ref(recv_rawData));
             end
         end
         

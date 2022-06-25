@@ -6,6 +6,8 @@
 #include <net/if.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
+#include <sys/time.h>
+#include <fcntl.h>
 
 #include <linux/can.h>
 #include <linux/can/raw.h>
@@ -20,7 +22,9 @@ int canSetup()
 {
     struct sockaddr_can addr;
 	struct ifreq ifr;
-
+    struct timeval tv;
+    tv.tv_sec = 1;
+    tv.tv_usec = 0;
 
 	//printf("CAN Sockets Demo\r\n one-round send test\n");
 
@@ -28,9 +32,12 @@ int canSetup()
 		//perror("Socket");
 		return 1;
 	}
-
+    
 	strcpy(ifr.ifr_name, "can1" );
 	ioctl(s, SIOCGIFINDEX, &ifr);
+    fcntl(s, F_SETFL, O_NONBLOCK); // non-blocking mode
+    // set timeout for blocking mmode
+    //setsockopt(s, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
 
 	memset(&addr, 0, sizeof(addr));
 	addr.can_family = AF_CAN;
@@ -48,8 +55,12 @@ int batchMessage(int32_t* canID_arry, uint8_t* send_RawData, int32_t dev_Num, in
 {
     int i;
 	int nbytes;
+    int errFlag[5];
+    for (i=0;i<5;i++)
+        errFlag[i]=0;
 	for (i=0;i<dev_Num;i++)
 	{
+        errFlag[i]=0;
 		send_frame.can_id = canID_arry[i];
 		send_frame.can_dlc = 8;
         send_frame.data[0] = send_RawData[i*8];
@@ -60,25 +71,39 @@ int batchMessage(int32_t* canID_arry, uint8_t* send_RawData, int32_t dev_Num, in
 		send_frame.data[5] = send_RawData[i*8+5];
 		send_frame.data[6] = send_RawData[i*8+6];
 		send_frame.data[7] = send_RawData[i*8+7];
+        //lseek(s, 0, SEEK_SET);
 		if (write(s, &send_frame, sizeof(struct can_frame)) != sizeof(struct can_frame)) 
 		{
 			//perror("Write");
-			return i+1;
+			errFlag[i]=2;
 		}
-		
-		nbytes = read(s, &recv_frame, sizeof(struct can_frame));
+        usleep(100);
+        struct can_frame recv_frame_tmp;
+		nbytes = read(s, &recv_frame_tmp, sizeof(struct can_frame));
 
  		if (nbytes < 0) {
-			//perror("Read");
-			return i+11;
+            errFlag[i]=3;
+            
 		}
 		int ii;
-		for (ii=0;ii<recv_frame.can_dlc;ii++)
-			rec_RawData[i*8+ii]=recv_frame.data[ii];
+        if (errFlag[i]>1)
+        {
+        for (ii=0;ii<8;ii++)
+			    rec_RawData[i*8+ii]=0xee;
+        recv_ID[i]=send_frame.can_id;
+        }
+        else
+        {for (ii=0;ii<8;ii++)
+			    rec_RawData[i*8+ii]=recv_frame_tmp.data[ii];
+        recv_ID[i]=recv_frame_tmp.can_id;
+        }
 
-		recv_ID[i]=recv_frame.can_id;
+		
 	}
-	return 0;
+    int sum=0;
+    for (i=0;i<5;i++)
+        sum+=errFlag[i];
+	return sum;
 }
 	
 
