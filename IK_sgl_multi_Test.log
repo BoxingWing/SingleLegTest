@@ -1,0 +1,83 @@
+**** Starting the application ****
+Path = /home/pi/MATLAB_ws/R2021b/E/SingleLegTest/work/
+CONNECT: entering XCP_CONNECTED status
+* Resource:          5H
+* Comm Mode Basic:   0H
+* Max CTO size:      255
+* Max DTO size:      65532
+* Protocol Version:  1
+* Transport Version: 1
+GET DAQ PROCESSOR INFO
+* DAQ Properties:    11H
+* MAX_DAQ:           65535
+* MAX_EVENT_CHANNEL: 128
+* MIN_DAQ:           0
+* Daq Key Byte:      0H
+GET DAQ RESOLUTION INFO
+* DAQ ODT Entry size granularity:   1
+* Max DAQ ODT Entry size:           255
+* STIM ODT Entry size granularity:  1
+* Max STIM ODT Entry size:          255
+* Timestamp Mode =                  34H
+* Timestamp Ticks =                 1
+SHORT_UPLOAD: reading at address 0x343c0
+SHORT_DOWNLOAD: writing at address 0x34288
+SHORT_DOWNLOAD: writing at address 0x34404
+SHORT_UPLOAD: reading at address 0x343e4
+SHORT_UPLOAD: reading at address 0x343a4
+SHORT_UPLOAD: reading at address 0x343a8
+SHORT_UPLOAD: reading at address 0x343ac
+SHORT_UPLOAD: reading at address 0x343b0
+SHORT_UPLOAD: reading at address 0x343b4
+SHORT_UPLOAD: reading at address 0x34398
+FREE_DAQ: clearing existing dynamic DAQ lists
+ALLOC_DAQ: allocating 1 DAQ lists
+ALLOC_ODT: allocating 1 ODTs in DAQ list 0
+ALLOC_ODT_ENTRY: allocating 1 ODT Entries in DAQ list 0 ODT 0
+SET_DAQ_PTR: updating current ODT entry pointer to DAQ 0, ODT 0, Entry 0
+XCP_WRITE_DAQ: writing DAQ 0 ODT 0 Entry 0: bitOffset = ffH size = 24 addressExtension = 0H address = 13bcf0H
+SET_DAQ_LIST_MODE: setting DAQ list 0: mode = 10H, eventId = 0, prescaler = 0, priority = 0
+START_STOP_DAQ_LIST: selected DAQ list 0
+START_STOP_SYNCH: starting DAQ list 0
+SHORT_DOWNLOAD: writing at address 0x341b0
+SHORT_DOWNLOAD: writing at address 0x341b8
+SHORT_DOWNLOAD: writing at address 0x341c0
+SHORT_DOWNLOAD: writing at address 0x341c8
+SHORT_DOWNLOAD: writing at address 0x341d0
+SHORT_DOWNLOAD: writing at address 0x341d8
+SHORT_DOWNLOAD: writing at address 0x341e0
+SHORT_DOWNLOAD: writing at address 0x341e8
+SHORT_DOWNLOAD: writing at address 0x341f0
+SHORT_DOWNLOAD: writing at address 0x341f8
+SHORT_DOWNLOAD: writing at address 0x34200
+SHORT_DOWNLOAD: writing at address 0x34208
+SHORT_DOWNLOAD: writing at address 0x34210
+SHORT_DOWNLOAD: writing at address 0x34218
+SHORT_DOWNLOAD: writing at address 0x34230
+SHORT_DOWNLOAD: writing at address 0x34248
+SHORT_DOWNLOAD: writing at address 0x34250
+SHORT_DOWNLOAD: writing at address 0x34260
+SHORT_DOWNLOAD: writing at address 0x34268
+SHORT_DOWNLOAD: writing at address 0x34278
+SHORT_DOWNLOAD: writing at address 0x3427c
+SHORT_DOWNLOAD: writing at address 0x343d4
+SHORT_DOWNLOAD: writing at address 0x34408
+SHORT_DOWNLOAD: writing at address 0x3428c
+SHORT_UPLOAD: reading at address 0x34398
+SHORT_DOWNLOAD: writing at address 0x34288
+SHORT_DOWNLOAD: writing at address 0x343a1
+
+** starting the model **
+Overrun detected: The sample time for the rate 0 is too short.
+Overrun detected: The sample time for the rate 0 is too short.
+Overrun detected: The sample time for the rate 0 is too short.
+Overrun detected: The sample time for the rate 0 is too short.
+Overrun detected: The sample time for the rate 0 is too short.
+Overrun detected: The sample time for the rate 0 is too short.
+Overrun detected: The sample time for the rate 0 is too short.
+Overrun detected: The sample time for the rate 0 is too short.
+SHORT_DOWNLOAD: writing at address 0x34200
+SHORT_DOWNLOAD: writing at address 0x34200
+SHORT_DOWNLOAD: writing at address 0x343a2
+START_STOP_SYNCH: stopping DAQ list 0
+DISCONNECT: entering XCP_DISCONNECTED status

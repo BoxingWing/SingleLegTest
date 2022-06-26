@@ -41,11 +41,17 @@ classdef FK_sgl < matlab.System
                 obj.FG,obj.FGH,obj.GH,theta2,theta3);
         pHnor=LegFK(obj.AC,obj.BE,obj.CD,obj.CDG,obj.DG, ...
                 obj.FG,obj.FGH,obj.GH,theta2,theta3);
-        if (pH(2)-pHnor(2))>0.005 && obj.STO<0.5
+%         if (pH(2)-pHnor(2))>0.005 || encoderArray(1)-BDG>0.04 && obj.STO<0.5
+%             td=1;
+%         else
+%             td=0;
+%         end
+        if encoderArray(1)-BDG>0.03 && obj.STO<0.5
             td=1;
         else
             td=0;
         end
+
         if abs(encoderArray(1)-BDG)>30/180*pi && abs(encoderArray(2)-DGH)>30/180*pi && ...
                 sum(motorCab)>2.5
             obj.STO=1;

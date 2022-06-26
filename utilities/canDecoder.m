@@ -22,13 +22,16 @@ classdef canDecoder < matlab.System
             obj.count=0;
         end
 
-        function [angle,speed,current,encoder] = stepImpl(obj,rawData,err)
+        function [angle,speed,current,encoder] = stepImpl(obj,rawData,err,recvID)
             angle=obj.angleOld;
             speed=obj.speedOld;
             current=obj.currentOld;
             encoder=obj.encoderOld;
+            
 
-            if err==0 && obj.errOld==0
+            IDFlag=abs(recvID(1)-0x141)<0.1 && abs(recvID(2)-0x142)<0.1 && ...
+                abs(recvID(3)-0x143)<0.1 && abs(recvID(4)-0x144)<0.1;
+            if err<1 && obj.errOld<1 && IDFlag
                 for i=1:1:3
                     idx=i*8-7;
                     angle(i) = double(typecast(rawData(idx+6:idx+7),'uint16'))/65535*360;

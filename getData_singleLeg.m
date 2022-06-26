@@ -1,7 +1,7 @@
 %% fetch data from raspberry pi
 mypi=raspberrypi;
 getFile(mypi,'sl_dataRec*.mat');
-getFile(mypi,'~/MATLAB_ws/R2021b/IK_sgl_Test.log'); % get the log file
+getFile(mypi,'~/MATLAB_ws/R2021b/IK_sgl_multi_Test.log'); % get the log file
 
 %% data plot
 close all;
@@ -32,7 +32,7 @@ plot(time,pH_FB(1,:),time,pH_Des(1,:));
 ylabel('pHx');xlabel('time');
 legend('FB','Des');
 subplot(2,1,2)
-plot(time,pH_FB(2,:),time,pH_Des(2,:));
+plot(time,pH_FB(2,:),time,pH_Des(2,:),time,td_FB);
 ylabel('pHy');xlabel('time');
 legend('FB','Des');
 
@@ -56,6 +56,11 @@ subplot(3,1,3)
 plot(time,MotorAngle_FB(3,:),time,MotorAngle_Des(3,:));
 ylabel('motorAngle3');xlabel('time');
 legend('FB','Des');
+
+% plot error
+figure();
+plot(time,err);
+xlabel('time');ylabel('err');
 
 % plot motor speed
 figure()
