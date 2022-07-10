@@ -53,10 +53,10 @@ classdef canSendRecv < matlab.System & ...
             % dev_Num: unint8
             canID_array=int32(canID_array);
             send_RawData=uint8(send_RawData);
-            recv_ID = int32(zeros(4,1)); % up to 4 devices
-            recv_rawData=uint8(zeros(32,1)); 
-            err=int32(0);
             dev_Num=int32(dev_Num);
+            recv_ID = int32(zeros(5,1)); 
+            recv_rawData=uint8(zeros(40,1)); 
+            err=int32(0);
             if isempty(coder.target)
                 % Place simulation output code here
             else

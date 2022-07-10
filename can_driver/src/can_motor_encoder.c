@@ -60,8 +60,8 @@ int batchMessage(int32_t* canID_arry, uint8_t* send_RawData, int32_t dev_Num, in
     int i;
     int ii;
 	int nbytes;
-    int errFlag[5];
-    for (i=0;i<5;i++)
+    int errFlag[dev_Num];
+    for (i=0;i<dev_Num;i++)
         errFlag[i]=0;
     struct timeval tv;
     tv.tv_sec = 1;
@@ -70,9 +70,9 @@ int batchMessage(int32_t* canID_arry, uint8_t* send_RawData, int32_t dev_Num, in
     tvOld.tv_sec = 1;
     tvOld.tv_usec = 0;
 
-    int32_t recIDtmp[4];
-    int32_t recDatatmp[32];
-    for (i=0;i<32;i++)
+    int32_t recIDtmp[dev_Num];
+    int32_t recDatatmp[dev_Num*8];
+    for (i=0;i<dev_Num*8;i++)
         recDatatmp[i]=0;
 	for (i=0;i<dev_Num;i++)
 	{
@@ -140,7 +140,7 @@ int batchMessage(int32_t* canID_arry, uint8_t* send_RawData, int32_t dev_Num, in
     }
 
     int sum=0;
-    for (i=0;i<5;i++)
+    for (i=0;i<dev_Num;i++)
         sum+=errFlag[i];
 	return sum;
 }
