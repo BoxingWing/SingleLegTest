@@ -101,8 +101,8 @@ classdef canSendRecv < matlab.System & ...
         end
         
         function varargout = getOutputSizeImpl(~)
-            varargout{1} = [4,1];
-            varargout{2} = [32,1];
+            varargout{1} = [5,1];
+            varargout{2} = [40,1];
             varargout{3} = [1,1];
         end
         
