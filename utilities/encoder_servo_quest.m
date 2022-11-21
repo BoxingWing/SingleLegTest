@@ -16,10 +16,12 @@ classdef encoder_servo_quest < matlab.System
             % Perform one-time calculations, such as computing constants
         end
 
-        function cmd = stepImpl(obj,servo_pos_des,servoEN)
+        function cmd = stepImpl(obj,servo_pos_des,servoEN,servoReset)
             cmd=uint8(zeros(16,1));
             if servoEN>0.5
                 cmd(9)=1;
+            elseif servoReset>0.5
+                cmd(9)=2;
             end
             cmd(11:14)=typecast(uint32(floor(servo_pos_des/(360.0/4096.0))),'uint8');
         end
